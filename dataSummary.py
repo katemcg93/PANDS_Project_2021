@@ -7,7 +7,7 @@ import pandas as pd
 import csv
 import os
 
-#Set everything to display 2 decimal places as default is 6, not required for this dataset
+#Set everything to display 2 decimal places 
 pd.set_option("display.precision", 2)
 
 #Reading in the Iris Data Set file and adding column names
@@ -36,6 +36,8 @@ def summaryFile():
     separator = ", "
     cleanHeaders = separator.join(columnHeaders[0:4])
 
+    descriptiveStats = (irisDataSet.describe())
+
 
     irisPlantSpecies = irisDataSet["Species"].unique()
 
@@ -55,12 +57,23 @@ def summaryFile():
         os.remove("IrisDataSummary.txt")
 
     else: 
-        print("This file doesn't exist")
+        print("New Summary Text File Created")
+    
 
     with open ("IrisDataSummary.txt", "w") as f:
         f.write("This dataset contains a total of {} samples, with {} attributes used to describe them.".format(totalRows, totalColumns))
         f.write("\nThe attributes are as follows: {} and {}.".format(cleanHeaders, columnHeaders[-1]))
+        
         f.write("\nThese samples are subdivided into one of {} species of iris plant. \nThese are: {} and {}.".format(irisPlantSpeciesCount, cleanSpeciesList, speciesList[-1]))
         f.write("\nEach species group contains a total of {} samples.".format(samplePerSpecies))
+        
+        f.write("\n")
+        f.write("\n")
+
+        f.write("A summary of each of the numeric variables can be found below:")
+
+        f.write("\n")
+        f.write("\n")
+        f.write(str(descriptiveStats))
 
 summaryFile()
