@@ -1,9 +1,11 @@
 #Author: Kate McGrath
 
-# This file will carry out some initial analysis on the iris dataset 
+# This code will carry out some initial analysis on the iris dataset 
 #and output summaries on each variable to a text file
 
 import pandas as pd
+import numpy as np
+import seaborn as sns
 import csv
 import os
 
@@ -14,8 +16,8 @@ pd.set_option("display.precision", 2)
 irisDataSet = pd.read_csv ("IrisDataSet.csv", sep = ",", names = ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width", "Species"])
 
 #In the names file accompanying the dataset, some errors in the 35th and 38th rows were highlighted 
-#and correct values were provided
-#This code is to overwrite the incorrect values with the correct ones for index 34 and 37 of the dataset
+#Overwriting incorrect values for samples 35 and 38 
+
 def updateRows(irisDataSet):
     irisDataSet.at[34, "Petal Width"] = 0.2
     irisDataSet.at[37, "Sepal Width"] = 3.6
@@ -24,35 +26,34 @@ def updateRows(irisDataSet):
 
 updateRows(irisDataSet)
 
+def dataSummary():
+    #This is a function that will output a brief description of the dataset to a text file
 
-def summaryFile():
-    #Will use
+    #Getting the rows and columns so can talk about number of samples/variables in dataset
+
     rowsAndColumns = irisDataSet.shape
-
     totalRows = rowsAndColumns[0]
     totalColumns = rowsAndColumns[1]
-
+ 
+    #Get list of variable names, without square brackets/commas, so they can be referenced in text file
     columnHeaders = irisDataSet.columns.values
     separator = ", "
     cleanHeaders = separator.join(columnHeaders[0:4])
 
-    descriptiveStats = (irisDataSet.describe())
-
-
+    #Get list of plant species names and total species sampled, so can reference them in text file
     irisPlantSpecies = irisDataSet["Species"].unique()
-
     speciesList = list(irisPlantSpecies)
     separator = ", "
     cleanSpeciesList = separator.join(speciesList[0:2])
-
     irisPlantSpeciesCount  = len(irisPlantSpecies)
 
     #Getting count of samples within one of the species groups for output file
+    #So number of samples per species can be referenced in output file
     #Because the sample count per species is the same in all groups can just take one of them
-    #Otherwise would have to repeat below code for each species and store in a list
+
     samplePerSpecies = (irisDataSet["Species"] == "Iris-versicolor").sum()
 
-
+    #If file already exists this will remove it, so not writing over existing file
     if os.path.exists("IrisDataSummary.txt"):  
         os.remove("IrisDataSummary.txt")
 
@@ -70,10 +71,24 @@ def summaryFile():
         f.write("\n")
         f.write("\n")
 
-        f.write("A summary of each of the numeric variables can be found below:")
 
-        f.write("\n")
-        f.write("\n")
-        f.write(str(descriptiveStats))
+def initialAnalysis ():
+    #This function will carry out some high level analysis on the data and ouptut the results to the irisDataSummary text file
+    #This will include overall descriptive stats and correlation between variables
+    #It will also display mean/SD broken down by species
 
-summaryFile()
+    #Get mean,
+
+    #Getting interquarti
+    print(irisDataSet.quantile(0.75)-irisDataSet.quantile(0.25))
+
+
+      
+
+
+
+
+dataSummary()
+initialAnalysis()
+
+
