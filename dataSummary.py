@@ -8,6 +8,7 @@ import numpy as np
 import seaborn as sns
 import csv
 import os
+import matplotlib.pyplot as plt
 
 #Set everything to display 2 decimal places 
 pd.set_option("display.precision", 2)
@@ -76,13 +77,27 @@ def initialAnalysis ():
     #This function will carry out some high level analysis on the data and ouptut the results to the irisDataSummary text file
     #This will include overall descriptive stats and correlation between variables
     #It will also display mean/SD broken down by species
+    
+    #Getting overall mean for each variable and broken down by species
 
-    #Get mean,
-
-    #Getting interquarti
-    print(irisDataSet.quantile(0.75)-irisDataSet.quantile(0.25))
+    overallMean = irisDataSet.mean()
+    speciesMean = irisDataSet.groupby("Species").mean()
 
 
+    overallStd = irisDataSet.std()
+    speciesStd = irisDataSet.groupby("Species").std()
+
+    overallCorr = irisDataSet.corr(method = "pearson")
+    speciesCorr = irisDataSet.groupby("Species").corr(method = "pearson")
+
+    print(overallCorr)
+    print(speciesCorr)
+
+    correlationMap = sns.heatmap(overallCorr, annot =True ,cmap = "mako")
+    plt.show()
+
+
+    
       
 
 
