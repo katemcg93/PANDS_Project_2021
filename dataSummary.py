@@ -19,6 +19,11 @@ irisDataSet = pd.read_csv ("IrisDataSet.csv", sep = ",", names = ["Sepal Length"
 #In the names file accompanying the dataset, some errors in the 35th and 38th rows were highlighted 
 #Overwriting incorrect values for samples 35 and 38 
 
+#Isolating the three species into own dataframes
+versicolor = irisDataSet[irisDataSet["Species"]=="Iris-versicolor"]
+setosa = irisDataSet[irisDataSet["Species"]=="Iris-setosa"]
+virginica = irisDataSet[irisDataSet["Species"]=="Iris-setosa"]
+
 def updateRows(irisDataSet):
     irisDataSet.at[34, "Petal Width"] = 0.2
     irisDataSet.at[37, "Sepal Width"] = 3.6
@@ -74,27 +79,45 @@ def dataSummary():
 
 
 def initialAnalysis ():
-    #This function will carry out some high level analysis on the data and ouptut the results to the irisDataSummary text file
-    #This will include overall descriptive stats and correlation between variables
-    #It will also display mean/SD broken down by species
-    
-    #Getting overall mean for each variable and broken down by species
-
+    #This function will carry out some high level analysis on the data
     overallMean = irisDataSet.mean()
     speciesMean = irisDataSet.groupby("Species").mean()
-
 
     overallStd = irisDataSet.std()
     speciesStd = irisDataSet.groupby("Species").std()
 
+    
     overallCorr = irisDataSet.corr(method = "pearson")
-    speciesCorr = irisDataSet.groupby("Species").corr(method = "pearson")
-
-    print(overallCorr)
-    print(speciesCorr)
+    versicolorCorr = versicolor.corr(method = "pearson")
+    virginicaCorr = virginica.corr(method = "pearson")
+    setosaCorr = setosa.corr(method = "pearson")
 
     correlationMap = sns.heatmap(overallCorr, annot =True ,cmap = "mako")
     plt.show()
+
+    correlationMapVersicolor = sns.heatmap(versicolorCorr, annot =True ,cmap = "mako")
+    plt.show()
+
+    correlationMapVirginica = sns.heatmap(virginicaCorr, annot =True ,cmap = "mako")
+    plt.show()
+
+    correlationMapSetosa = sns.heatmap(setosaCorr, annot =True ,cmap = "mako")
+    plt.show()
+
+    sns.histplot(irisDataSet, x = "Sepal Length", hue = "Species", multiple = "stack")
+    plt.show()
+
+    sns.histplot(irisDataSet, x = "Sepal Width", hue = "Species", multiple = "stack")
+    plt.show()
+
+    sns.histplot(irisDataSet, x = "Petal Length", hue = "Species", multiple = "stack")
+    plt.show()
+
+    sns.histplot(irisDataSet, x = "Petal Width", hue = "Species", multiple = "stack")
+    plt.show()
+
+
+
 
 
     

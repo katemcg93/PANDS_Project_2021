@@ -1,0 +1,6 @@
+This dataset contains a total of 150 samples, with 5 attributes used to describe them.
+The attributes are as follows: Sepal Length, Sepal Width, Petal Length, Petal Width and Species.
+These samples are subdivided into one of 3 species of iris plant. 
+These are: Iris-setosa, Iris-versicolor and Iris-virginica.
+Each species group contains a total of 50 samples.
+
