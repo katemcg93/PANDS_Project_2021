@@ -17,11 +17,24 @@ pd.set_option("display.precision", 2)
 #Reading in the Iris Data Set file and adding column names
 irisDataSet = pd.read_csv ("IrisDataSet.csv", sep = ",", names = ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width", "Species"])
 
+varNames = ["Sepal Width", "Petal Width", "Sepal Length", "Petal Length"]
 
 #Isolating the three species into own dataframes
 versicolor = irisDataSet[irisDataSet["Species"]=="Iris-versicolor"]
 setosa = irisDataSet[irisDataSet["Species"]=="Iris-setosa"]
 virginica = irisDataSet[irisDataSet["Species"]=="Iris-setosa"]
+
+#Isolating Variables into dataframes
+sepalLength = irisDataSet["Sepal Length"]
+sepalWidth = irisDataSet["Sepal Width"]
+petalLength = irisDataSet["Petal Length"]
+petalWidth = irisDataSet["Petal Width"]
+
+irisDSSpecies = irisDataSet.groupby(["Species"])
+spSepalLength = irisDSSpecies["Sepal Length"]
+spSepalWidth = irisDSSpecies["Sepal Width"]
+spPetalLength = irisDSSpecies["Petal Length"]
+spPetalWidth = irisDSSpecies["Petal Width"]
 
 def updaterows():
 #In the names file accompanying the dataset, some errors in the 35th and 38th rows were highlighted 
@@ -32,7 +45,7 @@ def updaterows():
     irisDataSet.at[37, "Petal Length"] = 1.4
     return irisDataSet
 
-updaterows()
+irisDataSet = updaterows()
 
 def datasummary():
     #This is a function that will output a brief description of the dataset to a text file
@@ -77,12 +90,19 @@ def datasummary():
         
         f.write("\n")
 
+datasummary()
+
 def descriptivestats ():
     descriptiveStats = irisDataSet.describe()
     with open ("IrisDataSummary.txt", "a") as f:
+        f.write("\n")
+        f.write("\n")
         f.write("Below is a summary of the characteristics of the Iris Data Set:")
         f.write("\n")
+        f.write("\n")
         f.write(str(descriptiveStats))
+
+descriptivestats()
 
 def createfile ():
     datasummary()
@@ -98,8 +118,8 @@ def meanandstd ():
     overallStd = irisDataSet.std()
     speciesStd = irisDataSet.groupby("Species").std()
 
-    print(overallMean, speciesMean)
-    print(overallStd, speciesStd)
+
+meanandstd()
 
 def correlation ():
 
@@ -112,6 +132,7 @@ def correlation ():
     virginicaCorrMap = correlationMap(virginica.corr(method = "pearson"))
     setosaCorrMap = correlationMap(setosa.corr(method = "pearson"))
 
+correlation()
 
 def histvariables():
     def overallHist(a):
@@ -134,28 +155,84 @@ def histvariables():
 
     return
 
+histvariables()
+
 def normalitytest():
+
     swNumpy = irisDataSet["Sepal Width"].to_numpy()
     pwNumpy = irisDataSet["Petal Width"].to_numpy()
     slNumpy = irisDataSet["Sepal Length"].to_numpy()
     plNumpy = irisDataSet["Petal Length"].to_numpy()
 
+
     varList = [swNumpy,pwNumpy, slNumpy, plNumpy]
-    varNames= ["Sepal Width", "Petal Width", "Sepal Length", "Petal Width"]
     normalDist = []
+    pValues = []
 
     for var in varList :
         shapiro_test = stats.shapiro(var)
         normalDist.append(shapiro_test)
-        print(normalDist)
+
+    for result in normalDist:
+        pValues.append(result[1])
+        
+    pValuesVars = dict(zip(varNames, pValues))
+
+    with open ("IrisDataSummary.txt", "a") as f:
+        f.write("\n")
+        f.write("\n")
+        f.write("Normality Testing using the Shapiro-Wilk method returned the following results: \n")
+        for key,value in pValuesVars.items():
+            if value > 0.05:
+                f.write("\n {}: normally distributed (p = {})".format(key,round(value,2)))
+            else:
+                f.write("\n {}: not normally distributed (p = {})".format(key,round(value),2))
+
+normalitytest()
 
 
-def analysis ():       
-    meanandstd()
-    correlation()
-    histvariables()
-    normalitytest()
+def outliers():
 
-analysis()
+    def iqrange (df):
+        Q1 = df.quantile(0.25)
+        Q3 = df.quantile(0.75)
+        IQR = Q3 - Q1
+
+        outliers = (df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))
+        totalOutliers = outliers.value_counts()
+        return totalOutliers
+      
+    slOutliers = iqrange(sepalLength).to_dict()
+    swOutliers = iqrange(sepalWidth).to_dict()
+    plOutliers = iqrange(petalLength).to_dict()
+    pwOutliers = iqrange(petalWidth).to_dict()
+
+    def testOutliers(key,dict):
+        if key in dict:
+            return ("Total Outliers: {}".format (dict[key]))
+        else:
+            return ("No Outliers in data")
+
+    slOutlierText = testOutliers(True, slOutliers)
+    swOutlierText = testOutliers(True, swOutliers)
+    plOutlierText = testOutliers(True, plOutliers)
+    pwOutlierText = testOutliers(True, pwOutliers)
+
+   
+    with open ("IrisDataSummary.txt", "a") as f:
+        f.write("\n")
+        f.write("\n")
+        f.write("Outlier testing for each variable returned the following results:")
+        f.write("\n")
+        f.write("\n {}: {}".format(varNames[0], swOutlierText))
+        f.write("\n {}: {}".format(varNames[1], pwOutlierText))
+        f.write("\n {}: {}".format(varNames[2], swOutlierText))
+        f.write("\n {}: {}".format(varNames[3], pwOutlierText))
+
+outliers()
+
+
+
+
 
 
