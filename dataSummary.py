@@ -90,19 +90,43 @@ def datasummary():
         
         f.write("\n")
 
-datasummary()
-
 def descriptivestats ():
     descriptiveStats = irisDataSet.describe()
+
+    descriptiveStatsVersicolor = versicolor.describe()
+    descriptiveStatsVirginica = virginica.describe()
+    descriptiveStatSetosa = setosa.describe()
+
     with open ("IrisDataSummary.txt", "a") as f:
         f.write("\n")
         f.write("\n")
         f.write("Below is a summary of the characteristics of the Iris Data Set:")
+
         f.write("\n")
         f.write("\n")
         f.write(str(descriptiveStats))
 
-descriptivestats()
+        f.write("\n")
+        f.write("\n")
+        f.write("Below are summaries of the three numerical variables broken down by species:")
+
+        speciesNames = ["Versicolor", "Virginica", "Setosa"]
+
+        f.write("\n")
+        f.write("\n")
+        f.write("\n {} :".format(speciesNames[0]))
+        f.write(str(descriptiveStatsVersicolor))
+
+        f.write("\n")
+        f.write("\n")
+        f.write("\n {} :".format(speciesNames[1]))
+        f.write(str(descriptiveStatsVirginica))
+
+        f.write("\n")
+        f.write("\n")
+        f.write("\n {} :".format(speciesNames[2]))
+        f.write(str(descriptiveStatSetosa))
+
 
 def createfile ():
     datasummary()
@@ -135,6 +159,7 @@ def correlation ():
 correlation()
 
 def histvariables():
+
     def overallHist(a):
         sns.histplot(irisDataSet, x = a, multiple = "stack")
         plt. show()
@@ -144,14 +169,17 @@ def histvariables():
     plenHist = overallHist("Petal Length")
     pwidHist = overallHist("Petal Width")
 
-    def histSpecies(a):
+    def histSpecies(a,):
         sns.histplot(irisDataSet, x = a, hue = "Species", multiple = "stack")
+
         plt.show()
 
     slenHistSpec = histSpecies("Sepal Length")
     swidHistSpec = histSpecies("Sepal Width")
     plenHistSpec = histSpecies("Petal Length")
     pwidHistSpec = histSpecies("Petal Width")
+
+    print(type(slenHistSpec))
 
     return
 
@@ -226,7 +254,7 @@ def outliers():
         f.write("\n")
         f.write("\n {}: {}".format(varNames[0], swOutlierText))
         f.write("\n {}: {}".format(varNames[1], pwOutlierText))
-        f.write("\n {}: {}".format(varNames[2], swOutlierText))
+        f.write("\n {}: {}".format(varNames[2], slOutlierText))
         f.write("\n {}: {}".format(varNames[3], pwOutlierText))
 
 outliers()
