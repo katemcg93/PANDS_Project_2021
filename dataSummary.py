@@ -30,6 +30,7 @@ sepalWidth = irisDataSet["Sepal Width"]
 petalLength = irisDataSet["Petal Length"]
 petalWidth = irisDataSet["Petal Width"]
 
+
 irisDSSpecies = irisDataSet.groupby(["Species"])
 spSepalLength = irisDSSpecies["Sepal Length"]
 spSepalWidth = irisDSSpecies["Sepal Width"]
@@ -108,23 +109,23 @@ def descriptivestats ():
 
         f.write("\n")
         f.write("\n")
-        f.write("Below are summaries of the three numerical variables broken down by species:")
+        f.write("Below are summaries of the four numerical variables broken down by species:")
 
         speciesNames = ["Versicolor", "Virginica", "Setosa"]
 
         f.write("\n")
         f.write("\n")
-        f.write("\n {} :".format(speciesNames[0]))
+        f.write("\n {}:".format(speciesNames[0]))
         f.write(str(descriptiveStatsVersicolor))
 
         f.write("\n")
         f.write("\n")
-        f.write("\n {} :".format(speciesNames[1]))
+        f.write("\n {}:".format(speciesNames[1]))
         f.write(str(descriptiveStatsVirginica))
 
         f.write("\n")
         f.write("\n")
-        f.write("\n {} :".format(speciesNames[2]))
+        f.write("\n {}:".format(speciesNames[2]))
         f.write(str(descriptiveStatSetosa))
 
 
@@ -142,45 +143,98 @@ def meanandstd ():
     overallStd = irisDataSet.std()
     speciesStd = irisDataSet.groupby("Species").std()
 
+    print(overallMean, overallStd, speciesMean, speciesStd)
+
+
 
 meanandstd()
 
 def correlation ():
-
     def correlationMap (x):
-        sns.heatmap(x, annot = True, cmap = "mako")
-        plt.show()
-    
+        plt.figure()
+        corMap = sns.heatmap(x, annot = True, cmap = "mako")
+        plt.tight_layout()
+        ax = plt.axes()
+        ax.set_yticklabels(labels = corMap.get_yticklabels(), fontsize = "10", va = "center")
+  
+
     overallCorrMap = correlationMap(irisDataSet.corr(method = "pearson"))
+    ax = plt.axes()
+    title = ax.set_title("Correlation Between Numerical Variables - All Species")
+    plt.savefig("{} corr.png".format("overall"))
+    plt.close()
+  
     versicolorCorrMap = correlationMap(versicolor.corr(method = "pearson"))
+    ax = plt.axes()
+    title= ax.set_title("Correlation Between Numerical Variables - Versicolor")
+    plt.savefig("{} corr.png".format("versicolor"))
+    plt.close()
+
     virginicaCorrMap = correlationMap(virginica.corr(method = "pearson"))
+    ax = plt.axes()
+    title = ax.set_title("Correlation Between Numerical Variables - Virginica")
+    plt.savefig("{} corr.png".format("virginica"))
+    plt.close()
+
     setosaCorrMap = correlationMap(setosa.corr(method = "pearson"))
+    ax = plt.axes()
+    title = ax.set_title("Correlation Between Numerical Variables - Setosa")
+    plt.savefig("{} corr.png".format("setosa"))
+    plt.close()
+
+
+
+
+
 
 correlation()
 
 def histvariables():
 
     def overallHist(a):
+        plt.figure()
         sns.histplot(irisDataSet, x = a, multiple = "stack")
-        plt. show()
+    
 
     slenHist = overallHist("Sepal Length")
+    plt.savefig("Sepal_Length_Overall.png")
+    plt.close()
+    
     swidHist = overallHist("Sepal Width")
-    plenHist = overallHist("Petal Length")
-    pwidHist = overallHist("Petal Width")
+    plt.savefig("Sepal_Width_Overall.png")
+    plt.close()
 
-    def histSpecies(a,):
+    plenHist = overallHist("Petal Length")
+    plt.savefig ("Petal_Length_Overall.png")
+    plt.close()
+
+    pwidHist = overallHist("Petal Width")
+    plt.savefig ("Petal_Width_Overall.png")
+    plt.close()
+
+
+    def histSpecies(a):
+        plt.figure()
         sns.histplot(irisDataSet, x = a, hue = "Species", multiple = "stack")
 
-        plt.show()
-
+       
     slenHistSpec = histSpecies("Sepal Length")
+    plt.savefig("Sepal_Length_Species.png")
+    plt.close()
+
     swidHistSpec = histSpecies("Sepal Width")
+    plt.savefig("Sepal_Width_Species.png")
+    plt.close()
+
     plenHistSpec = histSpecies("Petal Length")
+    plt.savefig("Petal_Length_Species.png")
+    plt.close()
+
     pwidHistSpec = histSpecies("Petal Width")
+    plt.savefig("Petal_Width_Species.png")
+    plt.close()
 
-    print(type(slenHistSpec))
-
+    
     return
 
 histvariables()
@@ -256,6 +310,77 @@ def outliers():
         f.write("\n {}: {}".format(varNames[1], pwOutlierText))
         f.write("\n {}: {}".format(varNames[2], slOutlierText))
         f.write("\n {}: {}".format(varNames[3], pwOutlierText))
+    
+    def boxplots ():
+        
+        sns.set(style = "whitegrid")
+        plt.figure(figsize = (14,12))
+
+        plt.subplot(2,2,1)
+
+        sl = sns.boxplot(x = "Sepal Length", data = irisDataSet, color = "#3dd178")
+        sl.set_title("Sepal Length", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+        sl.set_xlabel(None)
+
+        plt.subplot(2,2,2)
+        
+        sw = sns.boxplot(x = "Sepal Width", data = irisDataSet, color = "#31ded5")
+        sw.set_title("Sepal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+        sw.set_xlabel(None)
+
+        plt.subplot(2,2,3)
+
+        pw = sns.boxplot(x = "Petal Width", data = irisDataSet, color = "#31ded5")
+        pw.set_title("Petal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+        pw.set_xlabel(None)
+
+        plt.subplot(2,2,4)
+
+        pl = sns.boxplot(x = "Petal Length", data = irisDataSet, color = "#3dd178")
+        pl.set_title("Petal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+        pl.set_xlabel(None)
+        plt.tight_layout (pad = 8.0)
+        plt.savefig("Outliers Overall Dataset.png")
+        plt.close ()
+
+        sns.set_palette("BuGn")
+
+        plt.figure(figsize = (24,16))
+
+        plt.subplot(2,2,1)
+
+        ssl = sns.boxplot(x = "Species", y = "Sepal Length", data = irisDataSet, hue = "Species")
+        ssl.set_title("Sepal Length", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+        ssl.set_xlabel(None)
+
+        plt.subplot(2,2,2)
+        
+        ssw = sns.boxplot(x = "Species", y = "Sepal Width", data = irisDataSet, hue = "Species")
+        ssw.set_title("Sepal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+        ssw.set_xlabel(None)
+
+        plt.subplot(2,2,3)
+
+        spw = sns.boxplot(x = "Species", y  = "Petal Width", data = irisDataSet, hue = "Species", color = "#31ded5")
+        spw.set_title("Petal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+        spw.set_xlabel(None)
+
+        plt.subplot(2,2,4)
+
+        spl = sns.boxplot(x = "Species", y = "Petal Length", data = irisDataSet, hue = "Species", color = "#3dd178")
+        spl.set_title("Petal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+        spl.set_xlabel(None)
+
+        plt.tight_layout (pad = 8.0)
+        plt.savefig("Outliers by species.png")
+        plt.close ()
+        
+
+        
+
+    boxplots()
+
+
 
 outliers()
 
