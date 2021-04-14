@@ -145,8 +145,6 @@ def meanandstd ():
 
     print(overallMean, overallStd, speciesMean, speciesStd)
 
-
-
 meanandstd()
 
 def correlation ():
@@ -182,12 +180,82 @@ def correlation ():
     plt.savefig("{} corr.png".format("setosa"))
     plt.close()
 
-
-
-
-
-
 correlation()
+
+def scatterplots () :
+
+    def sw_pl ():
+        overallsp  = sns.scatterplot(data = irisDataSet, x = sepalWidth, y = petalLength, palette = "coolwarm")
+        plt.show()
+        plt.close()
+
+        speciessp  = sns.scatterplot(data = irisDataSet, hue = "Species", style = "Species", x = sepalWidth, y = petalLength, s = 100,palette = "rainbow")
+        plt.show()
+        plt.close()
+
+    sw_pl()
+
+    def sw_pw ():
+        overallsp  = sns.scatterplot(data = irisDataSet, x = sepalWidth, y = petalWidth, palette = "coolwarm")
+        plt.show()
+        plt.close()
+
+        speciessp  = sns.scatterplot(data = irisDataSet, hue = "Species", style = "Species", x = sepalWidth, y = petalWidth, s = 100, palette = "magma")
+        plt.show()
+        plt.close()
+    
+    sw_pw()
+
+    def sl_pl ():
+        overallsp  = sns.scatterplot(data = irisDataSet, x = sepalLength, y = petalLength, palette = "coolwarm")
+        plt.show()
+        plt.close()
+
+        speciessp  = sns.scatterplot(data = irisDataSet, hue = "Species", style = "Species", x = sepalLength, y = petalLength, s = 100,palette = "coolwarm")
+        plt.show()
+        plt.close()
+    
+
+    def sl_pw ():
+        overallsp  = sns.scatterplot(data = irisDataSet, x = sepalLength, y = petalLength, palette = "coolwarm")
+        plt.show()
+        plt.close()
+
+        speciessp  = sns.scatterplot(data = irisDataSet, hue = "Species", style = "Species", x = sepalLength, y = petalLength, s = 100,palette = "coolwarm")
+        plt.show()
+        plt.close()
+    
+    sl_pw()
+
+    def sl_sw ():
+        overallsp  = sns.scatterplot(data = irisDataSet, x = sepalLength, y = petalLength, palette = "coolwarm")
+        plt.show()
+        plt.close()
+
+        speciessp  = sns.scatterplot(data = irisDataSet, hue = "Species", style = "Species", x = sepalLength, y = sepalWidth, s = 100,palette = "coolwarm")
+        plt.show()
+        plt.close()
+    
+    sl_sw ()
+
+    def pl_pw ():
+        overallsp  = sns.scatterplot(data = irisDataSet, x = sepalLength, y = petalLength, palette = "coolwarm")
+        plt.show()
+        plt.close()
+
+        speciessp  = sns.scatterplot(data = irisDataSet, hue = "Species", style = "Species", x = petalLength, y = petalWidth, s = 100,palette = "coolwarm")
+        plt.show()
+        plt.close()
+    
+    pl_pw ()
+
+    pairplot = sns.pairplot(irisDataSet, hue = "Species", palette = "coolwarm")
+    plt.savefig("pairplot.png")
+    plt.close()
+    
+
+scatterplots ()
+
 
 def histvariables():
 
@@ -260,40 +328,45 @@ def normalitytest():
         
     pValuesVars = dict(zip(varNames, pValues))
 
-    with open ("IrisDataSummary.txt", "a") as f:
-        f.write("\n")
-        f.write("\n")
-        f.write("Normality Testing using the Shapiro-Wilk method returned the following results: \n")
-        for key,value in pValuesVars.items():
-            if value > 0.05:
-                f.write("\n {}: normally distributed (p = {})".format(key,round(value,2)))
-            else:
-                f.write("\n {}: not normally distributed (p = {})".format(key,round(value),2))
+    def update_file ():
+
+        with open ("IrisDataSummary.txt", "a") as f:
+            f.write("\n")
+            f.write("\n")
+            f.write("Normality Testing using the Shapiro-Wilk method returned the following results: \n")
+            for key,value in pValuesVars.items():
+                if value > 0.05:
+                    f.write("\n {}: normally distributed (p = {})".format(key,round(value,2)))
+                else:
+                    f.write("\n {}: not normally distributed (p = {})".format(key,round(value),2))
+    
+    update_file()
 
 normalitytest()
 
 
 def outliers():
 
-    def iqrange (df):
-        Q1 = df.quantile(0.25)
-        Q3 = df.quantile(0.75)
-        IQR = Q3 - Q1
+    df= irisDataSet
+    Q1 = df.quantile(0.25)
+    Q3 = df.quantile(0.75)
+    IQR = Q3 - Q1
 
-        outliers = (df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))
-        totalOutliers = outliers.value_counts()
-        return totalOutliers
+    outliers = (df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))
+    totalOutliers = outliers.value_counts()
+    return totalOutliers
       
     slOutliers = iqrange(sepalLength).to_dict()
     swOutliers = iqrange(sepalWidth).to_dict()
     plOutliers = iqrange(petalLength).to_dict()
     pwOutliers = iqrange(petalWidth).to_dict()
 
-    def testOutliers(key,dict):
-        if key in dict:
-            return ("Total Outliers: {}".format (dict[key]))
-        else:
-            return ("No Outliers in data")
+  
+    if key in dict:
+        return ("Total Outliers: {}".format (dict[key]))
+
+    else:
+        return ("No Outliers in data")
 
     slOutlierText = testOutliers(True, slOutliers)
     swOutlierText = testOutliers(True, swOutliers)
@@ -310,6 +383,7 @@ def outliers():
         f.write("\n {}: {}".format(varNames[1], pwOutlierText))
         f.write("\n {}: {}".format(varNames[2], slOutlierText))
         f.write("\n {}: {}".format(varNames[3], pwOutlierText))
+    
     
     def boxplots ():
         
@@ -337,7 +411,7 @@ def outliers():
         plt.subplot(2,2,4)
 
         pl = sns.boxplot(x = "Petal Length", data = irisDataSet, color = "#3dd178")
-        pl.set_title("Petal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+        pl.set_title("Petal Length", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
         pl.set_xlabel(None)
         plt.tight_layout (pad = 8.0)
         plt.savefig("Outliers Overall Dataset.png")
@@ -368,23 +442,38 @@ def outliers():
         plt.subplot(2,2,4)
 
         spl = sns.boxplot(x = "Species", y = "Petal Length", data = irisDataSet, hue = "Species", color = "#3dd178")
-        spl.set_title("Petal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+        spl.set_title("Petal Length", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
         spl.set_xlabel(None)
 
         plt.tight_layout (pad = 8.0)
         plt.savefig("Outliers by species.png")
-        plt.close ()
-        
-
-        
+        plt.close ()          
 
     boxplots()
-
 
 
 outliers()
 
 
+def levenes_test(x, y):
+    result = stats.levene(x,y)
+    if result[1] <0.05:
+        return False
+    else:
+        return True
+    
+setVirgSW = levenes_test(setosa["Sepal Width"], virginica["Sepal Width"])
+setVirgSL = levenes_test(setosa["Sepal Length"], virginica["Sepal Length"])
+setVirgPL = levenes_test(setosa["Petal Width"], virginica["Petal Width"])
+setVirgPW = levenes_test(setosa["Petal Length"], virginica["Petal Length"])
+print(setVirgPL,setVirgSL,setVirgSW,setVirgPW)
+
+setVersSW = levenes_test(setosa["Sepal Width"], versicolor["Sepal Width"])
+setVersSL = levenes_test(setosa["Sepal Length"], versicolor["Sepal Length"])
+setVersPL = levenes_test(setosa["Petal Width"], versicolor["Petal Width"])
+setVersPW = levenes_test(setosa["Petal Length"], versicolor["Petal Length"])
+print(setVersSW,setVersSL,setVersSW,setVersPW)
+   
 
 
 
