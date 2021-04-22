@@ -22,7 +22,7 @@ varNames = ["Sepal Width", "Petal Width", "Sepal Length", "Petal Length"]
 #Isolating the three species into own dataframes
 versicolor = irisDataSet[irisDataSet["Species"]=="Iris-versicolor"]
 setosa = irisDataSet[irisDataSet["Species"]=="Iris-setosa"]
-virginica = irisDataSet[irisDataSet["Species"]=="Iris-setosa"]
+virginica = irisDataSet[irisDataSet["Species"]=="Iris-virginica"]
 
 #Isolating Variables into dataframes
 sepalLength = irisDataSet["Sepal Length"]
@@ -457,6 +457,7 @@ outliers()
 
 def levenes_test(x, y):
     result = stats.levene(x,y)
+    print(result)
     if result[1] <0.05:
         return False
     else:
@@ -464,15 +465,60 @@ def levenes_test(x, y):
     
 setVirgSW = levenes_test(setosa["Sepal Width"], virginica["Sepal Width"])
 setVirgSL = levenes_test(setosa["Sepal Length"], virginica["Sepal Length"])
-setVirgPL = levenes_test(setosa["Petal Width"], virginica["Petal Width"])
-setVirgPW = levenes_test(setosa["Petal Length"], virginica["Petal Length"])
+setVirgPW = levenes_test(setosa["Petal Width"], virginica["Petal Width"])
+setVirgPL = levenes_test(setosa["Petal Length"], virginica["Petal Length"])
 print(setVirgPL,setVirgSL,setVirgSW,setVirgPW)
 
 setVersSW = levenes_test(setosa["Sepal Width"], versicolor["Sepal Width"])
 setVersSL = levenes_test(setosa["Sepal Length"], versicolor["Sepal Length"])
-setVersPL = levenes_test(setosa["Petal Width"], versicolor["Petal Width"])
-setVersPW = levenes_test(setosa["Petal Length"], versicolor["Petal Length"])
+setVersPW = levenes_test(setosa["Petal Width"], versicolor["Petal Width"])
+setVersPL = levenes_test(setosa["Petal Length"], versicolor["Petal Length"])
 print(setVersSW,setVersSL,setVersSW,setVersPW)
+
+verVirgSW = levenes_test(virginica["Sepal Width"], versicolor["Sepal Width"])
+verVirgSL = levenes_test(virginica["Sepal Length"], versicolor["Sepal Length"])
+verVirgPW = levenes_test(virginica["Petal Width"], versicolor["Petal Width"])
+verVirgPL = levenes_test(virginica["Petal Length"], versicolor["Petal Length"])
+print(verVirgSW,verVirgSL,verVirgPL,verVirgPW)
+
+def compare_means_ev (x,y):
+    result = stats.ttest_ind(x, y)
+    print(result)
+    if result [1] < 0.05:
+        print("Significant difference")
+    
+    else:
+        print("Not significant ")
+
+def compare_means_no_ev (x,y):
+    result = stats.ttest_ind(x, y, equal_var=False)
+    print(result)
+    if result [1] < 0.05:
+        print("Significant difference")
+    
+    else:
+        print("Not significant ")
+
+    
+
+sigSetVirgSW = compare_means_no_ev(setosa["Sepal Width"], virginica["Sepal Width"])
+sigsetVirgSL = compare_means_no_ev(setosa["Sepal Length"], virginica["Sepal Length"])
+sigsetVirgPW = compare_means_ev(setosa["Petal Width"], virginica["Petal Width"])
+sigsetVirgPL = compare_means_no_ev(setosa["Petal Length"], virginica["Petal Length"])
+
+sigSetVersSW = compare_means_ev(setosa["Sepal Width"], versicolor["Sepal Width"])
+sigSetVersSL = compare_means_no_ev(setosa["Sepal Length"], versicolor["Sepal Length"])
+sigsetVersPW = compare_means_ev(setosa["Petal Width"], versicolor["Petal Width"])
+sigsetVersSPL= compare_means_no_ev(setosa["Petal Length"], versicolor["Petal Length"])
+
+sigVerVirgSW = compare_means_ev(versicolor["Sepal Width"], virginica["Sepal Width"])
+sigVerVirgSL = compare_means_ev(versicolor["Sepal Length"], virginica["Sepal Length"])
+sigsVerVirgPW = compare_means_ev(versicolor["Petal Width"], virginica["Petal Width"])
+sigsVerVirgPL = compare_means_no_ev(versicolor["Petal Length"], virginica["Petal Length"])
+
+
+
+
    
 
 
