@@ -454,6 +454,17 @@ def outliers():
 
 outliers()
 
+def kde_plots (a):
+    sns.kdeplot (data = irisDataSet, x = a, palette="Paired",hue = "Species", fill = True)
+    plt.show()
+    plt.close()
+
+kde_plots (irisDataSet["Sepal Length"])
+kde_plots (irisDataSet["Sepal Width"])
+kde_plots (irisDataSet["Petal Length"])
+kde_plots (irisDataSet["Petal Width"])
+
+
 
 def levenes_test(x, y):
     result = stats.levene(x,y)
