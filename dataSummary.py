@@ -31,12 +31,6 @@ petalLength = irisDataSet["Petal Length"]
 petalWidth = irisDataSet["Petal Width"]
 
 
-irisDSSpecies = irisDataSet.groupby(["Species"])
-spSepalLength = irisDSSpecies["Sepal Length"]
-spSepalWidth = irisDSSpecies["Sepal Width"]
-spPetalLength = irisDSSpecies["Petal Length"]
-spPetalWidth = irisDSSpecies["Petal Width"]
-
 def updaterows():
 #In the names file accompanying the dataset, some errors in the 35th and 38th rows were highlighted 
 #Overwriting incorrect values for samples 35 and 38 
@@ -146,70 +140,6 @@ def meanandstd ():
     print(overallMean, overallStd, speciesMean, speciesStd)
 
 meanandstd()
-
-def correlation ():
-    def correlationMap (x):
-        plt.figure()
-        corMap = sns.heatmap(x, annot = True, cmap = "mako")
-        plt.tight_layout()
-        ax = plt.axes()
-        ax.set_yticklabels(labels = corMap.get_yticklabels(), fontsize = "10", va = "center")
-  
-
-    overallCorrMap = correlationMap(irisDataSet.corr(method = "pearson"))
-    ax = plt.axes()
-    title = ax.set_title("Correlation Between Numerical Variables - All Species")
-    plt.savefig("{} corr.png".format("overall"))
-    plt.close()
-  
-    versicolorCorrMap = correlationMap(versicolor.corr(method = "pearson"))
-    ax = plt.axes()
-    title= ax.set_title("Correlation Between Numerical Variables - Versicolor")
-    plt.savefig("{} corr.png".format("versicolor"))
-    plt.close()
-
-    virginicaCorrMap = correlationMap(virginica.corr(method = "pearson"))
-    ax = plt.axes()
-    title = ax.set_title("Correlation Between Numerical Variables - Virginica")
-    plt.savefig("{} corr.png".format("virginica"))
-    plt.close()
-
-    setosaCorrMap = correlationMap(setosa.corr(method = "pearson"))
-    ax = plt.axes()
-    title = ax.set_title("Correlation Between Numerical Variables - Setosa")
-    plt.savefig("{} corr.png".format("setosa"))
-    plt.close()
-
-correlation()
-
-def scatterplots (a,b,x):
-    scatterPlot = sns.scatterplot(data = irisDataSet, x=a, y=b, hue = "Species", style = "Species", s = 100, palette = "coolwarm")
-    plt.savefig("{}.png".format(x))
-    plt.show ()
-    plt.close ()
-    return scatterPlot
-
-species_sw_pl = scatterplots(sepalWidth,petalLength, x = "sepalwdith_petallength")
-species_pl_sw = scatterplots(petalLength,sepalWidth, x = "petallength_sepalwdith")
-species_sw_pl = scatterplots(sepalWidth,sepalLength, x = "sepalwdith_sepallength")
-species_pl_sw = scatterplots(sepalLength,sepalWidth, x = "sepallength_sepalwdith")
-species_sw_pl = scatterplots(sepalWidth,petalLength, x = "sepalwdith_petallength")
-species_sw_pl = scatterplots(sepalLength,petalLength, x = "sepallength_petallength")
-species_pl_sw = scatterplots(petalLength,sepalLength, x = "petallength_sepalength")
-species_sw_pl = scatterplots(petalWidth,petalLength, x = "petalwidth_petallength")
-species_pl_sw = scatterplots(petalLength,petalWidth, x = "petallength_petalwidth")
-
-
-
-def pairplot ():
-    pairplot = sns.pairplot(irisDataSet, hue = "Species", palette = "coolwarm")
-    plt.savefig("pairplot.png")
-    plt.close()
-
-pairplot()
-
-
-
 
 def histvariables():
 
@@ -417,6 +347,68 @@ kde_plots (irisDataSet["Sepal Length"])
 kde_plots (irisDataSet["Sepal Width"])
 kde_plots (irisDataSet["Petal Length"])
 kde_plots (irisDataSet["Petal Width"])
+
+
+def correlation ():
+    def correlationMap (x):
+        plt.figure()
+        corMap = sns.heatmap(x, annot = True, cmap = "mako")
+        plt.tight_layout()
+        ax = plt.axes()
+        ax.set_yticklabels(labels = corMap.get_yticklabels(), fontsize = "10", va = "center")
+  
+
+    overallCorrMap = correlationMap(irisDataSet.corr(method = "pearson"))
+    ax = plt.axes()
+    title = ax.set_title("Correlation Between Numerical Variables - All Species")
+    plt.savefig("{} corr.png".format("overall"))
+    plt.close()
+  
+    versicolorCorrMap = correlationMap(versicolor.corr(method = "pearson"))
+    ax = plt.axes()
+    title= ax.set_title("Correlation Between Numerical Variables - Versicolor")
+    plt.savefig("{} corr.png".format("versicolor"))
+    plt.close()
+
+    virginicaCorrMap = correlationMap(virginica.corr(method = "pearson"))
+    ax = plt.axes()
+    title = ax.set_title("Correlation Between Numerical Variables - Virginica")
+    plt.savefig("{} corr.png".format("virginica"))
+    plt.close()
+
+    setosaCorrMap = correlationMap(setosa.corr(method = "pearson"))
+    ax = plt.axes()
+    title = ax.set_title("Correlation Between Numerical Variables - Setosa")
+    plt.savefig("{} corr.png".format("setosa"))
+    plt.close()
+
+correlation()
+
+def scatterplots (a,b,x):
+    scatterPlot = sns.scatterplot(data = irisDataSet, x=a, y=b, hue = "Species", style = "Species", s = 100, palette = "coolwarm")
+    plt.savefig("{}.png".format(x))
+    plt.show ()
+    plt.close ()
+    return scatterPlot
+
+species_sw_pl = scatterplots(sepalWidth,petalLength, x = "sepalwdith_petallength")
+species_pl_sw = scatterplots(petalLength,sepalWidth, x = "petallength_sepalwdith")
+species_sw_pl = scatterplots(sepalWidth,sepalLength, x = "sepalwdith_sepallength")
+species_pl_sw = scatterplots(sepalLength,sepalWidth, x = "sepallength_sepalwdith")
+species_sw_pl = scatterplots(sepalWidth,petalLength, x = "sepalwdith_petallength")
+species_sw_pl = scatterplots(sepalLength,petalLength, x = "sepallength_petallength")
+species_pl_sw = scatterplots(petalLength,sepalLength, x = "petallength_sepalength")
+species_sw_pl = scatterplots(petalWidth,petalLength, x = "petalwidth_petallength")
+species_pl_sw = scatterplots(petalLength,petalWidth, x = "petallength_petalwidth")
+
+
+
+def pairplot ():
+    pairplot = sns.pairplot(irisDataSet, hue = "Species", palette = "coolwarm")
+    plt.savefig("pairplot.png")
+    plt.close()
+
+pairplot()
 
 
 
