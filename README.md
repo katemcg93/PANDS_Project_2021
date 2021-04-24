@@ -75,7 +75,7 @@ To organize my findings, I have identified three key research questions:
 The first question is answered using histograms, descriptive statistics, normality testing and the identification of outliers. The second is addressed using correlation heatmaps and scatter plots,to visually represent the degree to which the variables influence each other. The final question is addressed by comparing the mean value of each variable at the species level. 
 
 ## Part 1: Features of the Data Set
- ### Reading in Iris Data Set File
+
 The first part of the analysis.py file reads the csv (comma delimited) file containing the data set, and assigns names to each column. This is needed so we can distinguish between the four numerical variables, and group the data by species during analysis. The csv data is converted into a Pandas data frame, to facilitate analysis. 
 
 ```python
@@ -97,7 +97,25 @@ def updaterows():
 
 irisDataSet = updaterows()
 ```
+The next part of the analysis focuses on extracting some initial high-level insights on the data and outputting these to a text file. The total rows and columns are obtained and isolated into their own variables so they can be used in the file. 
 
+```python
+def datasummary():
+    #This is a function that will output a brief description of the dataset to a text file
+
+    #Getting the rows and columns so can talk about number of samples/variables in dataset
+
+    rowsAndColumns = irisDataSet.shape
+    totalRows = rowsAndColumns[0]
+    totalColumns = rowsAndColumns[1]
+```
+Once the variables required for the initial data description have all been declared, these are written to a text file. First the program will check if the file already exists, and if so it will be removed to prevent duplication of text. 
+
+The next part of the program calculates descriptive statistics for the data set as a whole and for each of the three species, which were isolated into their own dataframes for this purpose. These are also written to the text file.
+
+
+
+ 
 
 ## References
 
