@@ -182,79 +182,33 @@ def correlation ():
 
 correlation()
 
-def scatterplots () :
+def scatterplots (a,b,x):
+    scatterPlot = sns.scatterplot(data = irisDataSet, x=a, y=b, hue = "Species", style = "Species", s = 100, palette = "coolwarm")
+    plt.savefig("{}.png".format(x))
+    plt.show ()
+    plt.close ()
+    return scatterPlot
 
-    def sw_pl ():
-        overallsp  = sns.scatterplot(data = irisDataSet, x = sepalWidth, y = petalLength, palette = "coolwarm")
-        plt.show()
-        plt.close()
+species_sw_pl = scatterplots(sepalWidth,petalLength, x = "sepalwdith_petallength")
+species_pl_sw = scatterplots(petalLength,sepalWidth, x = "petallength_sepalwdith")
+species_sw_pl = scatterplots(sepalWidth,sepalLength, x = "sepalwdith_sepallength")
+species_pl_sw = scatterplots(sepalLength,sepalWidth, x = "sepallength_sepalwdith")
+species_sw_pl = scatterplots(sepalWidth,petalLength, x = "sepalwdith_petallength")
+species_sw_pl = scatterplots(sepalLength,petalLength, x = "sepallength_petallength")
+species_pl_sw = scatterplots(petalLength,sepalLength, x = "petallength_sepalength")
+species_sw_pl = scatterplots(petalWidth,petalLength, x = "petalwidth_petallength")
+species_pl_sw = scatterplots(petalLength,petalWidth, x = "petallength_petalwidth")
 
-        speciessp  = sns.scatterplot(data = irisDataSet, hue = "Species", style = "Species", x = sepalWidth, y = petalLength, s = 100,palette = "rainbow")
-        plt.show()
-        plt.close()
 
-    sw_pl()
 
-    def sw_pw ():
-        overallsp  = sns.scatterplot(data = irisDataSet, x = sepalWidth, y = petalWidth, palette = "coolwarm")
-        plt.show()
-        plt.close()
-
-        speciessp  = sns.scatterplot(data = irisDataSet, hue = "Species", style = "Species", x = sepalWidth, y = petalWidth, s = 100, palette = "magma")
-        plt.show()
-        plt.close()
-    
-    sw_pw()
-
-    def sl_pl ():
-        overallsp  = sns.scatterplot(data = irisDataSet, x = sepalLength, y = petalLength, palette = "coolwarm")
-        plt.show()
-        plt.close()
-
-        speciessp  = sns.scatterplot(data = irisDataSet, hue = "Species", style = "Species", x = sepalLength, y = petalLength, s = 100,palette = "coolwarm")
-        plt.show()
-        plt.close()
-    
-
-    def sl_pw ():
-        overallsp  = sns.scatterplot(data = irisDataSet, x = sepalLength, y = petalLength, palette = "coolwarm")
-        plt.show()
-        plt.close()
-
-        speciessp  = sns.scatterplot(data = irisDataSet, hue = "Species", style = "Species", x = sepalLength, y = petalLength, s = 100,palette = "coolwarm")
-        plt.show()
-        plt.close()
-    
-    sl_pw()
-
-    def sl_sw ():
-        overallsp  = sns.scatterplot(data = irisDataSet, x = sepalLength, y = petalLength, palette = "coolwarm")
-        plt.show()
-        plt.close()
-
-        speciessp  = sns.scatterplot(data = irisDataSet, hue = "Species", style = "Species", x = sepalLength, y = sepalWidth, s = 100,palette = "coolwarm")
-        plt.show()
-        plt.close()
-    
-    sl_sw ()
-
-    def pl_pw ():
-        overallsp  = sns.scatterplot(data = irisDataSet, x = sepalLength, y = petalLength, palette = "coolwarm")
-        plt.show()
-        plt.close()
-
-        speciessp  = sns.scatterplot(data = irisDataSet, hue = "Species", style = "Species", x = petalLength, y = petalWidth, s = 100,palette = "coolwarm")
-        plt.show()
-        plt.close()
-    
-    pl_pw ()
-
+def pairplot ():
     pairplot = sns.pairplot(irisDataSet, hue = "Species", palette = "coolwarm")
     plt.savefig("pairplot.png")
     plt.close()
-    
 
-scatterplots ()
+pairplot()
+
+
 
 
 def histvariables():
@@ -314,7 +268,6 @@ def normalitytest():
     slNumpy = irisDataSet["Sepal Length"].to_numpy()
     plNumpy = irisDataSet["Petal Length"].to_numpy()
 
-
     varList = [swNumpy,pwNumpy, slNumpy, plNumpy]
     normalDist = []
     pValues = []
@@ -327,6 +280,7 @@ def normalitytest():
         pValues.append(result[1])
         
     pValuesVars = dict(zip(varNames, pValues))
+
 
     def update_file ():
 
