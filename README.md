@@ -1,13 +1,43 @@
-# PANDS Project 2021
-Repository for Fisher's Iris Data Set Analysis
+# GMIT Higher Diploma in Data Anaytics
+## Programming and Scripting Project 2021: Analysis of the Iris Flower Data Set
+## Author
+Kate McGrath
+## Student ID
+G00398908
+## Submission Date
+30/04/2021
+## Introduction
 
-Rough summary of what I'm going to talk about in this file
+This repository contains code to characterise and analyse the Iris Flower Data set, and output a summary text file and graphs highlighting key findings.
+## Code and Modules/Libraries
+The code associated with this project is written exclusively in Python, and was developed using the following software:</br>
+  * Anaconda
+  * Visual Studio Code
+  * Cmder
 
-Introduction: name of project, my name, code and modules required to run programme. V. high level introduction (about 1 line) on what the project is
+The following libararies should be installed in order to run the code without issue:
+  * Numpy
+  * Matplotlib (pyplot)
+  * Seaborn
+  * Scipy (stats)
 
-Summary of dataset: History of dataset, data on three different species of iris flower, collected in 1936, measuring 4 variables, sepal and petal width/length. Talk about how it's used as intro to data analysis/machine learning and why.
+Additionally, the following standard python modules are leveraged in the code:
+  * Csv (to read in and manipulate the Iris Data Set)
+  * Os  (for file creation exception handling)
+ </br>
 
-Research questions: When I started this project I was aiming to answer three key questions: 1. What are the characteristics of the dataset as a whole, and on a species level? i.e. what is the degree of distribution within the dataset with respect to each of the variables, is the data normally distributed as a whole, on a species level, mean and standard deviation, heavy tailed or light tailed etc.  2. Do the 4 numerical variables influence each other? for example, if petal width increases, does this make an increas in petal width more likely? 3. Is there a significant inter-species difference in the mean value for each of the numercial variables?
+## Overview of Data Set
 
-Code: Include snippets, explain what code does, screenshots, observations
+The Iris Data set was first published in 1936, and is recognized as a seminal work within the domain of pattern recognition literature [1]. Its author, Sir Ronald Fisher, was a celebrated statistician and geneticist. Other notable contributions made by Fisher to the field of statistics include the Fisher's Exact Test, which determines whether a non-random association exists between two categorical (grouping) variables and the analysis of variance (ANOVA) test, which is a method of determining whether the means of two or more groups differ significantly [2].
+
+
+
+## References
+
+1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
+2. Medium. 2021. The Iris Dataset — A Little Bit of History and Biology. [online] Available at: <https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5> [Accessed 24 April 2021].
+
+
+
+
 
