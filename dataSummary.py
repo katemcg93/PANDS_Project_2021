@@ -6,16 +6,21 @@
 import pandas as pd
 import numpy as np
 import seaborn as sns
-import csv
-import os
 import matplotlib.pyplot as plt
 from scipy import stats
+
+# to read in/manipulate file
+import csv
+# file creation exception handling
+import os 
+
 
 #Set everything to display 2 decimal places 
 pd.set_option("display.precision", 2)
 
 #Reading in the Iris Data Set file and adding column names
 irisDataSet = pd.read_csv ("IrisDataSet.csv", sep = ",", names = ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width", "Species"])
+
 
 varNames = ["Sepal Width", "Petal Width", "Sepal Length", "Petal Length"]
 
@@ -32,8 +37,8 @@ petalWidth = irisDataSet["Petal Width"]
 
 
 def updaterows():
-#In the names file accompanying the dataset, some errors in the 35th and 38th rows were highlighted 
-#Overwriting incorrect values for samples 35 and 38 
+    #In the names file accompanying the dataset, some errors in the 35th and 38th rows were highlighted 
+    #Overwriting incorrect values for samples 35 and 38 
 
     irisDataSet.at[34, "Petal Width"] = 0.2
     irisDataSet.at[37, "Sepal Width"] = 3.6
@@ -87,40 +92,95 @@ def datasummary():
 
 def descriptivestats ():
     descriptiveStats = irisDataSet.describe()
+    print (descriptiveStats)
 
     descriptiveStatsVersicolor = versicolor.describe()
+    print(descriptiveStatsVersicolor)
+
     descriptiveStatsVirginica = virginica.describe()
+    print(descriptiveStatsVirginica)
+
     descriptiveStatSetosa = setosa.describe()
+    print(descriptiveStatSetosa)
+
+    skew = irisDataSet.skew()
+    print(skew)
+
+    kt = irisDataSet.kurt ()
+    print(kt)
 
     with open ("IrisDataSummary.txt", "a") as f:
         f.write("\n")
         f.write("\n")
-        f.write("Below is a summary of the characteristics of the Iris Data Set:")
+        f.write("\tDescriptive Statistics")
+        f.write("\n")
+        f.write ("=" * 24)
 
         f.write("\n")
+        f.write("\tOverall Data Set")
+        f.write("\n")
+        f.write("=" * 24)
         f.write("\n")
         f.write(str(descriptiveStats))
 
         f.write("\n")
         f.write("\n")
-        f.write("Below are summaries of the four numerical variables broken down by species:")
 
         speciesNames = ["Versicolor", "Virginica", "Setosa"]
 
         f.write("\n")
         f.write("\n")
-        f.write("\n {}:".format(speciesNames[0]))
+        f.write("=" * 24)
+        f.write("\n")
+        f.write("\t {}:".format(speciesNames[0]))
+        f.write("\n")
+        f.write("=" * 24)
+        f.write("\n")
         f.write(str(descriptiveStatsVersicolor))
+        f.write("\n")
 
         f.write("\n")
         f.write("\n")
-        f.write("\n {}:".format(speciesNames[1]))
+        f.write("=" * 24)
+        f.write("\n")
+        f.write("\t {}:".format(speciesNames[1]))
+        f.write("\n")
+        f.write("=" * 24)
+        f.write("\n")
         f.write(str(descriptiveStatsVirginica))
+        f.write("\n")
 
         f.write("\n")
         f.write("\n")
-        f.write("\n {}:".format(speciesNames[2]))
+        f.write("=" * 24)
+        f.write("\n")
+        f.write("\t {}:".format(speciesNames[2]))
+        f.write("\n")
+        f.write("=" * 24)
+        f.write("\n")
         f.write(str(descriptiveStatSetosa))
+        f.write("\n")
+
+        f.write("\n")
+        f.write("\n")
+        f.write("=" * 24)
+        f.write("\n")
+        f.write("\t Skewness")
+        f.write("\n")
+        f.write("=" * 24)
+        f.write("\n")
+        f.write(str(skew))
+        f.write("\n")
+
+        f.write("\n")
+        f.write("\n")
+        f.write("=" * 24)
+        f.write("\n")
+        f.write("\t Kurtosis")
+        f.write("\n")
+        f.write("=" * 24)
+        f.write("\n")
+        f.write(str(kt))
 
 
 def createfile ():
@@ -401,16 +461,12 @@ species_pl_sw = scatterplots(petalLength,sepalLength, x = "petallength_sepalengt
 species_sw_pl = scatterplots(petalWidth,petalLength, x = "petalwidth_petallength")
 species_pl_sw = scatterplots(petalLength,petalWidth, x = "petallength_petalwidth")
 
-
-
 def pairplot ():
     pairplot = sns.pairplot(irisDataSet, hue = "Species", palette = "coolwarm")
     plt.savefig("pairplot.png")
     plt.close()
 
 pairplot()
-
-
 
 def levenes_test(x, y):
     result = stats.levene(x,y)
