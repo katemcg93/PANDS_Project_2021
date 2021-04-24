@@ -30,6 +30,14 @@ Additionally, the following standard python modules are leveraged in the code:
 
 The Iris Data set was first published in 1936, and is recognized as a seminal work within the domain of pattern recognition literature [1]. Its author, Sir Ronald Fisher, was a celebrated statistician and geneticist. Other notable contributions made by Fisher to the field of statistics include the Fisher's Exact Test, which determines whether a non-random association exists between two categorical (grouping) variables and the analysis of variance (ANOVA) test, which is a method of determining whether the means of two or more groups differ significantly [2].
 
+<p align="center">
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Fisher.PNG?raw=true" alt="Sir Ronald Fisher"/></br>
+  <br></br>
+ *Figure 1: Sir Ronald Fisher, Author of the Iris Data Set. Source: Wikimedia Commons* 
+</p>
+
+
+
 
 
 ## References
