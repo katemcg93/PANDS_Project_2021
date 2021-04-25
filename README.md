@@ -113,16 +113,42 @@ Once the variables required for the initial data description have all been decla
 
 The next part of the program calculates descriptive statistics for the data set as a whole and for each of the three species, which were isolated into their own dataframes for this purpose. These are also written to the text file.
 
+```python 
+def descriptivestats ():
 
+    descriptiveStats = irisDataSet.describe()
+    descriptiveStatsVersicolor = versicolor.describe()
+    descriptiveStatsVirginica = virginica.describe()
+    descriptiveStatSetosa = setosa.describe()
+````
 
+To get a better understanding of the distribution and consistency of the data, the program calculates skewness, kurtosis, total outliers and normality for each variable. These are also outputted to the text file.
+
+Skewness measures the symmetry of a data distribution, i.e. whether it is skewed to the left (negative) or right (positive) of the central peak. Kurtosis measures the extent to which the peak of a distribution distributes from the shape of a normal distribution. A positive kurtosis value indicates the data is heavy tailed (more data concentrated in the tails/periphery of the distribution), and conversely a positive value indicates a light tailed distribution (more data concentrated around the peak) [3][4][5]
+
+Outliers are obtained by calculating the interquartile range (all data between the first and third quartile), multiplying this value by 1.5 and identifying all data outside of this range. Identifying outliers within the data set is a good practice as these can impact figures for mean and standard deviation, and in some cases may signify anomalies in the data that warrant further investigation. [6][7][8]
+
+````python
+    def iqrange (df):
+        Q1 = df.quantile(0.25)
+        Q3 = df.quantile(0.75)
+        IQR = Q3 - Q1
+
+        outliers = (df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))
+        totalOutliers = outliers.value_counts()
+        return totalOutliers
+  ````
  
 
 ## References
 
 1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
 2. Medium. 2021. The Iris Dataset — A Little Bit of History and Biology. [online] Available at: <https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5> [Accessed 24 April 2021].
-
-
-
+3. Kolekar, P., 2021. Chapter 8 Descriptive statistics | BioSakshat - Free Study Materials. [online] Biosakshat.github.io. Available at: <https://biosakshat.github.io/descriptive-statistics.html> [Accessed 25 April 2021].
+4. McNeese, B. and Barson, T., 2021. Are the Skewness and Kurtosis Useful Statistics?. [online] BPI Consulting. Available at: <https://www.spcforexcel.com/knowledge/basic-statistics/are-skewness-and-kurtosis-useful-statistics#:~:text=If%20the%20kurtosis%20is%20less%20than%20zero%2C%20then%20the%20distribution,the%20impact%20of%20sample%20size.> [Accessed 25 April 2021].
+5. Itl.nist.gov. 2021. 1.3.5.11. Measures of Skewness and Kurtosis. [online] Available at: <https://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm> [Accessed 25 April 2021].
+6. GeeksforGeeks. 2021. Interquartile Range to Detect Outliers in Data - GeeksforGeeks. [online] Available at: <https://www.geeksforgeeks.org/interquartile-range-to-detect-outliers-in-data/> [Accessed 25 April 2021].
+7. Singh, D. and Outliers, C., 2021. Cleaning up Data Outliers with Python | Pluralsight. [online] Pluralsight.com. Available at: <https://www.pluralsight.com/guides/cleaning-up-data-from-outliers> [Accessed 25 April 2021].
+8. Medium. 2021. Hands-on : Outlier Detection and Treatment in Python Using 1.5 IQR rule. [online] Available at: <https://medium.com/@prashant.nair2050/hands-on-outlier-detection-and-treatment-in-python-using-1-5-iqr-rule-f9ff1961a414> [Accessed 25 April 2021].
 
 
