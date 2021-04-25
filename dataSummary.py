@@ -1,4 +1,4 @@
-#Author: Kate McGrath
+  #Author: Kate McGrath
 
 # This code will carry out some initial analysis on the iris dataset 
 #and output summaries on each variable to a text file
@@ -91,165 +91,277 @@ def datasummary():
         f.write("\n")
 
 def descriptivestats ():
+
+# Outputting descriptive statistics : mean, percentiles, max, min
+# For whole dataset and each species to analyse differences between them
     descriptiveStats = irisDataSet.describe()
-    print (descriptiveStats)
 
     descriptiveStatsVersicolor = versicolor.describe()
-    print(descriptiveStatsVersicolor)
 
     descriptiveStatsVirginica = virginica.describe()
-    print(descriptiveStatsVirginica)
 
     descriptiveStatSetosa = setosa.describe()
-    print(descriptiveStatSetosa)
+
+#Calculating skewness and kurtosis to get better understanding of data distribution
+#Is the data symmetrical and is it light/heavy tailed
 
     skew = irisDataSet.skew()
-    print(skew)
-
     kt = irisDataSet.kurt ()
-    print(kt)
 
+#Writing results of output to summary text file
+#First creating headings using = symbol to make file easier to read
+   
     with open ("IrisDataSummary.txt", "a") as f:
         f.write("\n")
         f.write("\n")
         f.write("\tDescriptive Statistics")
         f.write("\n")
-        f.write ("=" * 24)
+        f.write ("=" * 40)
 
         f.write("\n")
         f.write("\tOverall Data Set")
         f.write("\n")
-        f.write("=" * 24)
+        f.write("=" * 40)
         f.write("\n")
         f.write(str(descriptiveStats))
 
         f.write("\n")
         f.write("\n")
+    
+    #Putting species names into array so can use them as headings for descriptive stats
 
         speciesNames = ["Versicolor", "Virginica", "Setosa"]
 
         f.write("\n")
         f.write("\n")
-        f.write("=" * 24)
+        f.write("=" * 40)
         f.write("\n")
         f.write("\t {}:".format(speciesNames[0]))
         f.write("\n")
-        f.write("=" * 24)
+        f.write("=" * 40)
         f.write("\n")
         f.write(str(descriptiveStatsVersicolor))
         f.write("\n")
 
         f.write("\n")
         f.write("\n")
-        f.write("=" * 24)
+        f.write("=" * 40)
         f.write("\n")
         f.write("\t {}:".format(speciesNames[1]))
         f.write("\n")
-        f.write("=" * 24)
+        f.write("=" * 40)
         f.write("\n")
         f.write(str(descriptiveStatsVirginica))
         f.write("\n")
 
         f.write("\n")
         f.write("\n")
-        f.write("=" * 24)
+        f.write("=" * 40)
         f.write("\n")
         f.write("\t {}:".format(speciesNames[2]))
         f.write("\n")
-        f.write("=" * 24)
+        f.write("=" * 40)
         f.write("\n")
         f.write(str(descriptiveStatSetosa))
         f.write("\n")
 
         f.write("\n")
         f.write("\n")
-        f.write("=" * 24)
+        f.write("=" * 40)
         f.write("\n")
         f.write("\t Skewness")
         f.write("\n")
-        f.write("=" * 24)
+        f.write("=" * 40)
         f.write("\n")
         f.write(str(skew))
         f.write("\n")
 
         f.write("\n")
         f.write("\n")
-        f.write("=" * 24)
+        f.write("=" * 40)
         f.write("\n")
         f.write("\t Kurtosis")
         f.write("\n")
-        f.write("=" * 24)
+        f.write("=" * 40)
         f.write("\n")
         f.write(str(kt))
 
+def outliers():
+
+    #This function is to understand how many outliers are contained in the dataset
+    #Outliers: where sample values are abnormally higher/lower than the range within which most of the population falls (the interquartile range)
+    #Generally done in the early stages of data analysis as outliers can impact the accuracy of statistical tests
+    #Outliers can be calculated by getting the interquartile range and adding 1.5 x IQR to Q3 and subtracting this figure from Q1
+    #Any numbers outside these ranges are outliers (upper or lower bound)
+    #This function calculates the IQR, detects outliers and identifies which variable they're from
+    #It updates the text file with total outliers per variable
+
+    def iqrange (df):
+        Q1 = df.quantile(0.25)
+        Q3 = df.quantile(0.75)
+        IQR = Q3 - Q1
+
+        outliers = (df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))
+        totalOutliers = outliers.value_counts()
+        return totalOutliers
+    
+    #The above test returns a count of outliers (True) and normal values (False). 
+    #Below code converts the output to a dict, so can test later whether outliers, i.e. samples with a value of True are present 
+
+    slOutliers = iqrange(sepalLength).to_dict()
+    swOutliers = iqrange(sepalWidth).to_dict()
+    plOutliers = iqrange(petalLength).to_dict()
+    pwOutliers = iqrange(petalWidth).to_dict()
+
+  #Function to detect whether outliers exist in the dataset for each variable, and if so, return the total outlier count with variable name
+  # This will then be written to the text file
+   
+    def testOutliers(key,dict):
+        if key in dict:
+            return ("Total Outliers: {}".format (dict[key]))
+        else:
+            return ("No Outliers in data")
+
+    slOutlierText = testOutliers(True, slOutliers)
+    swOutlierText = testOutliers(True, swOutliers)
+    plOutlierText = testOutliers(True, plOutliers)
+    pwOutlierText = testOutliers(True, pwOutliers)
+
+
+    with open ("IrisDataSummary.txt", "a") as f:
+        f.write("\n")
+        f.write("\n")
+        f.write("=" * 40)
+        f.write("\n")
+        f.write("\t Outliers:")
+        f.write("\n")
+        f.write("=" * 40)
+        f.write("\n")
+        f.write("\n {}: {}".format(varNames[0], swOutlierText))
+        f.write("\n {}: {}".format(varNames[1], pwOutlierText))
+        f.write("\n {}: {}".format(varNames[2], slOutlierText))
+        f.write("\n {}: {}".format(varNames[3], pwOutlierText))
+
+outliers ()
+
+    
+def boxplots ():
+    sns.set(style = "whitegrid")
+    plt.figure(figsize = (14,12))
+
+    plt.subplot(2,2,1)
+
+    sl = sns.boxplot(x = "Sepal Length", data = irisDataSet, color = "#3dd178")
+    sl.set_title("Sepal Length", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    sl.set_xlabel(None)
+
+    plt.subplot(2,2,2)
+        
+    sw = sns.boxplot(x = "Sepal Width", data = irisDataSet, color = "#31ded5")
+    sw.set_title("Sepal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    sw.set_xlabel(None)
+
+    plt.subplot(2,2,3)
+
+    pw = sns.boxplot(x = "Petal Width", data = irisDataSet, color = "#31ded5")
+    pw.set_title("Petal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    pw.set_xlabel(None)
+
+    plt.subplot(2,2,4)
+
+    pl = sns.boxplot(x = "Petal Length", data = irisDataSet, color = "#3dd178")
+    pl.set_title("Petal Length", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    pl.set_xlabel(None)
+    plt.tight_layout (pad = 8.0)
+    plt.savefig("Outliers Overall Dataset.png")
+    plt.close ()
+
+    sns.set_palette("BuGn")
+
+    plt.figure(figsize = (24,16))
+
+    plt.subplot(2,2,1)
+
+    ssl = sns.boxplot(x = "Species", y = "Sepal Length", data = irisDataSet, hue = "Species")
+    ssl.set_title("Sepal Length", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    ssl.set_xlabel(None)
+
+    plt.subplot(2,2,2)
+        
+    ssw = sns.boxplot(x = "Species", y = "Sepal Width", data = irisDataSet, hue = "Species")
+    ssw.set_title("Sepal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    ssw.set_xlabel(None)
+
+    plt.subplot(2,2,3)
+
+    spw = sns.boxplot(x = "Species", y  = "Petal Width", data = irisDataSet, hue = "Species", color = "#31ded5")
+    spw.set_title("Petal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    spw.set_xlabel(None)
+
+    plt.subplot(2,2,4)
+
+    spl = sns.boxplot(x = "Species", y = "Petal Length", data = irisDataSet, hue = "Species", color = "#3dd178")
+    spl.set_title("Petal Length", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    spl.set_xlabel(None)
+
+    plt.tight_layout (pad = 8.0)
+    plt.savefig("Outliers by species.png")
+    plt.close () 
+         
+boxplots()
 
 def createfile ():
     datasummary()
     descriptivestats()
+    outliers ()
 
 createfile ()
 
-def meanandstd ():
 
-    overallMean = irisDataSet.mean()
-    speciesMean = irisDataSet.groupby("Species").mean()
+def histograms():
+    sns.set(style = "white")
+    sns.set(style = "ticks")
 
-    overallStd = irisDataSet.std()
-    speciesStd = irisDataSet.groupby("Species").std()
-
-    print(overallMean, overallStd, speciesMean, speciesStd)
-
-meanandstd()
-
-def histvariables():
-
-    def overallHist(a):
-        plt.figure()
-        sns.histplot(irisDataSet, x = a, multiple = "stack")
+    plt.subplot(2,2,1)
+    sns.histplot(irisDataSet, x = "Sepal Length", multiple = "stack", color = "#FCBCB8" )
     
+    plt.subplot(2,2,2)
+    sns.histplot(irisDataSet, x = "Sepal Width", multiple = "stack", color = "#A7E8BD")
 
-    slenHist = overallHist("Sepal Length")
-    plt.savefig("Sepal_Length_Overall.png")
-    plt.close()
+    plt.subplot(2,2,3)
+    sns.histplot(irisDataSet, x = "Petal Length", multiple = "stack", color = "#EFA7A7")
+
+    plt.subplot(2,2,4)
+    sns.histplot(irisDataSet, x = "Petal Width", multiple = "stack", color = "#C7EAE4")
+
+    plt.suptitle("\t Data Distribution: All Species", size = 24, fontstyle = "oblique")
+    plt.tight_layout()
+
+    plt.savefig("histoverall.png")
+    plt.close ()
+
+    slh = sns.histplot(irisDataSet, x = "Sepal Length", element = "step", palette = "BuPu", hue = "Species")
+    slh.set_title("Sepal Length Distribution by Species", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    plt.savefig("Sepal length.png")
+    plt.close ()
     
-    swidHist = overallHist("Sepal Width")
-    plt.savefig("Sepal_Width_Overall.png")
+    swh = sns.histplot(irisDataSet, x = "Sepal Width", element = "step", palette = "BuPu", hue = "Species")
+    swh.set_title("Sepal Width Distribution by Species", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    plt.savefig("Sepal Width.png")
+    plt.close ()
+
+
+    plh = sns.histplot(irisDataSet, x = "Petal Length", element = "step", palette = "BuPu", hue = "Species")
+    plh.set_title("Petal Length Distribution by Species", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    plt.savefig("Petal Length.png")
     plt.close()
 
-    plenHist = overallHist("Petal Length")
-    plt.savefig ("Petal_Length_Overall.png")
-    plt.close()
+    pwh = sns.histplot(irisDataSet, x = "Petal Width", element = "step", palette = "BuPu", hue = "Species")
+    pwh.set_title("Petal Width Distribution by Species", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    plt.savefig("Petal Width.png")
+    plt.close ()
 
-    pwidHist = overallHist("Petal Width")
-    plt.savefig ("Petal_Width_Overall.png")
-    plt.close()
-
-
-    def histSpecies(a):
-        plt.figure()
-        sns.histplot(irisDataSet, x = a, hue = "Species", multiple = "stack")
-
-       
-    slenHistSpec = histSpecies("Sepal Length")
-    plt.savefig("Sepal_Length_Species.png")
-    plt.close()
-
-    swidHistSpec = histSpecies("Sepal Width")
-    plt.savefig("Sepal_Width_Species.png")
-    plt.close()
-
-    plenHistSpec = histSpecies("Petal Length")
-    plt.savefig("Petal_Length_Species.png")
-    plt.close()
-
-    pwidHistSpec = histSpecies("Petal Width")
-    plt.savefig("Petal_Width_Species.png")
-    plt.close()
-
-    
-    return
-
-histvariables()
+histograms()
 
 def normalitytest():
 
@@ -277,7 +389,11 @@ def normalitytest():
         with open ("IrisDataSummary.txt", "a") as f:
             f.write("\n")
             f.write("\n")
-            f.write("Normality Testing using the Shapiro-Wilk method returned the following results: \n")
+            f.write("=" * 40)
+            f.write("\n")
+            f.write("Data Distribution")
+            f.write("\n")
+            f.write("=" * 40)
             for key,value in pValuesVars.items():
                 if value > 0.05:
                     f.write("\n {}: normally distributed (p = {})".format(key,round(value,2)))
@@ -288,125 +404,16 @@ def normalitytest():
 
 normalitytest()
 
-
-def outliers():
-
-    df= irisDataSet
-    Q1 = df.quantile(0.25)
-    Q3 = df.quantile(0.75)
-    IQR = Q3 - Q1
-
-    outliers = (df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))
-    totalOutliers = outliers.value_counts()
-    return totalOutliers
-      
-    slOutliers = iqrange(sepalLength).to_dict()
-    swOutliers = iqrange(sepalWidth).to_dict()
-    plOutliers = iqrange(petalLength).to_dict()
-    pwOutliers = iqrange(petalWidth).to_dict()
-
-  
-    if key in dict:
-        return ("Total Outliers: {}".format (dict[key]))
-
-    else:
-        return ("No Outliers in data")
-
-    slOutlierText = testOutliers(True, slOutliers)
-    swOutlierText = testOutliers(True, swOutliers)
-    plOutlierText = testOutliers(True, plOutliers)
-    pwOutlierText = testOutliers(True, pwOutliers)
-
-   
-    with open ("IrisDataSummary.txt", "a") as f:
-        f.write("\n")
-        f.write("\n")
-        f.write("Outlier testing for each variable returned the following results:")
-        f.write("\n")
-        f.write("\n {}: {}".format(varNames[0], swOutlierText))
-        f.write("\n {}: {}".format(varNames[1], pwOutlierText))
-        f.write("\n {}: {}".format(varNames[2], slOutlierText))
-        f.write("\n {}: {}".format(varNames[3], pwOutlierText))
-    
-    
-    def boxplots ():
-        
-        sns.set(style = "whitegrid")
-        plt.figure(figsize = (14,12))
-
-        plt.subplot(2,2,1)
-
-        sl = sns.boxplot(x = "Sepal Length", data = irisDataSet, color = "#3dd178")
-        sl.set_title("Sepal Length", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
-        sl.set_xlabel(None)
-
-        plt.subplot(2,2,2)
-        
-        sw = sns.boxplot(x = "Sepal Width", data = irisDataSet, color = "#31ded5")
-        sw.set_title("Sepal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
-        sw.set_xlabel(None)
-
-        plt.subplot(2,2,3)
-
-        pw = sns.boxplot(x = "Petal Width", data = irisDataSet, color = "#31ded5")
-        pw.set_title("Petal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
-        pw.set_xlabel(None)
-
-        plt.subplot(2,2,4)
-
-        pl = sns.boxplot(x = "Petal Length", data = irisDataSet, color = "#3dd178")
-        pl.set_title("Petal Length", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
-        pl.set_xlabel(None)
-        plt.tight_layout (pad = 8.0)
-        plt.savefig("Outliers Overall Dataset.png")
-        plt.close ()
-
-        sns.set_palette("BuGn")
-
-        plt.figure(figsize = (24,16))
-
-        plt.subplot(2,2,1)
-
-        ssl = sns.boxplot(x = "Species", y = "Sepal Length", data = irisDataSet, hue = "Species")
-        ssl.set_title("Sepal Length", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
-        ssl.set_xlabel(None)
-
-        plt.subplot(2,2,2)
-        
-        ssw = sns.boxplot(x = "Species", y = "Sepal Width", data = irisDataSet, hue = "Species")
-        ssw.set_title("Sepal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
-        ssw.set_xlabel(None)
-
-        plt.subplot(2,2,3)
-
-        spw = sns.boxplot(x = "Species", y  = "Petal Width", data = irisDataSet, hue = "Species", color = "#31ded5")
-        spw.set_title("Petal Width", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
-        spw.set_xlabel(None)
-
-        plt.subplot(2,2,4)
-
-        spl = sns.boxplot(x = "Species", y = "Petal Length", data = irisDataSet, hue = "Species", color = "#3dd178")
-        spl.set_title("Petal Length", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
-        spl.set_xlabel(None)
-
-        plt.tight_layout (pad = 8.0)
-        plt.savefig("Outliers by species.png")
-        plt.close ()          
-
-    boxplots()
-
-
-outliers()
-
-def kde_plots (a):
-    sns.kdeplot (data = irisDataSet, x = a, palette="Paired",hue = "Species", fill = True)
-    plt.show()
+def kde_plots (a,t):
+    kdeplot = sns.kdeplot (data = irisDataSet, x = a, palette="Paired",hue = "Species", fill = True)
+    kdeplot.set_title("{}".format(t), fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    plt.savefig("{}.png".format(t))
     plt.close()
 
-kde_plots (irisDataSet["Sepal Length"])
-kde_plots (irisDataSet["Sepal Width"])
-kde_plots (irisDataSet["Petal Length"])
-kde_plots (irisDataSet["Petal Width"])
+kde_plots (irisDataSet["Sepal Length"], t = "Sepal Length KDE")
+kde_plots (irisDataSet["Sepal Width"],  t = "Sepal Width KDE")
+kde_plots (irisDataSet["Petal Length"], t = "Petal Length KDE")
+kde_plots (irisDataSet["Petal Width"], t = "Petal Width KDE")
 
 
 def correlation ():
@@ -444,22 +451,22 @@ def correlation ():
 
 correlation()
 
-def scatterplots (a,b,x):
+def scatterplots (a,b,x, t):
     scatterPlot = sns.scatterplot(data = irisDataSet, x=a, y=b, hue = "Species", style = "Species", s = 100, palette = "coolwarm")
+    scatterPlot.set_title("{}".format(t), fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
     plt.savefig("{}.png".format(x))
-    plt.show ()
+    #plt.show ()
     plt.close ()
     return scatterPlot
 
-species_sw_pl = scatterplots(sepalWidth,petalLength, x = "sepalwdith_petallength")
-species_pl_sw = scatterplots(petalLength,sepalWidth, x = "petallength_sepalwdith")
-species_sw_pl = scatterplots(sepalWidth,sepalLength, x = "sepalwdith_sepallength")
-species_pl_sw = scatterplots(sepalLength,sepalWidth, x = "sepallength_sepalwdith")
-species_sw_pl = scatterplots(sepalWidth,petalLength, x = "sepalwdith_petallength")
-species_sw_pl = scatterplots(sepalLength,petalLength, x = "sepallength_petallength")
-species_pl_sw = scatterplots(petalLength,sepalLength, x = "petallength_sepalength")
-species_sw_pl = scatterplots(petalWidth,petalLength, x = "petalwidth_petallength")
-species_pl_sw = scatterplots(petalLength,petalWidth, x = "petallength_petalwidth")
+species_sw_pl = scatterplots(sepalWidth,petalLength, x = "sepalwdith_petallength", t = "Correlation: Sepal Width vs Petal Length")
+species_pl_sw = scatterplots(petalLength,sepalWidth, x = "petallength_sepalwdith", t = "Correlation: Petal Length vs Sepal Width")
+species_sw_pl = scatterplots(sepalWidth,sepalLength, x = "sepalwdith_sepallength", t = "Correlation: Sepal Width vs Sepal Length")
+species_pl_sw = scatterplots(sepalLength,sepalWidth, x = "sepallength_sepalwdith", t = "Correlation: Sepal Length vs Sepal Width")
+species_sw_pl = scatterplots(sepalWidth,petalLength, x = "sepalwdith_petallength", t = "Correlation: Sepal Width vs Petal Length")
+species_pl_sw = scatterplots(petalLength,sepalLength, x = "petallength_sepalength",t = "Correlation: Petal Width vs Sepal Length")
+species_sw_pl = scatterplots(petalWidth,petalLength, x = "petalwidth_petallength", t = "Correlation: Petal Width vs Petal Length" )
+species_pl_sw = scatterplots(petalLength,petalWidth, x = "petallength_petalwidth", t = "Correlation: Petal Length vs Petal Width" )
 
 def pairplot ():
     pairplot = sns.pairplot(irisDataSet, hue = "Species", palette = "coolwarm")
@@ -470,7 +477,7 @@ pairplot()
 
 def levenes_test(x, y):
     result = stats.levene(x,y)
-    print(result)
+    #print(result)
     if result[1] <0.05:
         return False
     else:
@@ -480,19 +487,19 @@ setVirgSW = levenes_test(setosa["Sepal Width"], virginica["Sepal Width"])
 setVirgSL = levenes_test(setosa["Sepal Length"], virginica["Sepal Length"])
 setVirgPW = levenes_test(setosa["Petal Width"], virginica["Petal Width"])
 setVirgPL = levenes_test(setosa["Petal Length"], virginica["Petal Length"])
-print(setVirgPL,setVirgSL,setVirgSW,setVirgPW)
+#print(setVirgPL,setVirgSL,setVirgSW,setVirgPW)
 
 setVersSW = levenes_test(setosa["Sepal Width"], versicolor["Sepal Width"])
 setVersSL = levenes_test(setosa["Sepal Length"], versicolor["Sepal Length"])
 setVersPW = levenes_test(setosa["Petal Width"], versicolor["Petal Width"])
 setVersPL = levenes_test(setosa["Petal Length"], versicolor["Petal Length"])
-print(setVersSW,setVersSL,setVersSW,setVersPW)
+#print(setVersSW,setVersSL,setVersSW,setVersPW)
 
 verVirgSW = levenes_test(virginica["Sepal Width"], versicolor["Sepal Width"])
 verVirgSL = levenes_test(virginica["Sepal Length"], versicolor["Sepal Length"])
 verVirgPW = levenes_test(virginica["Petal Width"], versicolor["Petal Width"])
 verVirgPL = levenes_test(virginica["Petal Length"], versicolor["Petal Length"])
-print(verVirgSW,verVirgSL,verVirgPL,verVirgPW)
+#print(verVirgSW,verVirgSL,verVirgPL,verVirgPW)
 
 def compare_means_ev (x,y):
     result = stats.ttest_ind(x, y)
@@ -528,7 +535,6 @@ sigVerVirgSW = compare_means_ev(versicolor["Sepal Width"], virginica["Sepal Widt
 sigVerVirgSL = compare_means_ev(versicolor["Sepal Length"], virginica["Sepal Length"])
 sigsVerVirgPW = compare_means_ev(versicolor["Petal Width"], virginica["Petal Width"])
 sigsVerVirgPL = compare_means_no_ev(versicolor["Petal Length"], virginica["Petal Length"])
-
 
 
 
