@@ -91,10 +91,34 @@ dtype: float64
  Sepal Length: No Outliers in data
  Petal Length: No Outliers in data
 
-========================================
-Data Distribution
-========================================
+============================================================
+	 Data Distribution : Overall
+============================================================
  Sepal Width: normally distributed (p = 0.1)
  Petal Width: not normally distributed (p = 0)
  Sepal Length: not normally distributed (p = 0)
  Petal Length: not normally distributed (p = 0)
+
+============================================================
+	 Data Distribution : Versicolor
+============================================================
+ Sepal Width: normally distributed (p = 0.34)
+ Petal Width: not normally distributed (p = 0)
+ Sepal Length: normally distributed (p = 0.46)
+ Petal Length: normally distributed (p = 0.16)
+
+============================================================
+	 Data Distribution : Virginica
+============================================================
+ Sepal Width: normally distributed (p = 0.18)
+ Petal Width: normally distributed (p = 0.09)
+ Sepal Length: normally distributed (p = 0.26)
+ Petal Length: normally distributed (p = 0.11)
+
+============================================================
+	 Data Distribution : Setosa
+============================================================
+ Sepal Width: normally distributed (p = 0.2)
+ Petal Width: not normally distributed (p = 0)
+ Sepal Length: normally distributed (p = 0.46)
+ Petal Length: normally distributed (p = 0.05)

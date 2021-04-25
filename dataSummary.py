@@ -242,8 +242,6 @@ def outliers():
         f.write("\n {}: {}".format(varNames[2], slOutlierText))
         f.write("\n {}: {}".format(varNames[3], pwOutlierText))
 
-outliers ()
-
     
 def boxplots ():
     sns.set(style = "whitegrid")
@@ -363,12 +361,13 @@ def histograms():
 
 histograms()
 
-def normalitytest():
+def normalitytest(df, t):
 
-    swNumpy = irisDataSet["Sepal Width"].to_numpy()
-    pwNumpy = irisDataSet["Petal Width"].to_numpy()
-    slNumpy = irisDataSet["Sepal Length"].to_numpy()
-    plNumpy = irisDataSet["Petal Length"].to_numpy()
+    #Converting data to numpy array for normality calculation
+    swNumpy = df["Sepal Width"].to_numpy()
+    pwNumpy = df["Petal Width"].to_numpy()
+    slNumpy = df["Sepal Length"].to_numpy()
+    plNumpy = df["Petal Length"].to_numpy()
 
     varList = [swNumpy,pwNumpy, slNumpy, plNumpy]
     normalDist = []
@@ -389,11 +388,11 @@ def normalitytest():
         with open ("IrisDataSummary.txt", "a") as f:
             f.write("\n")
             f.write("\n")
-            f.write("=" * 40)
+            f.write("=" * 60)
             f.write("\n")
-            f.write("Data Distribution")
+            f.write("\t Data Distribution : {}".format(t))
             f.write("\n")
-            f.write("=" * 40)
+            f.write("=" * 60)
             for key,value in pValuesVars.items():
                 if value > 0.05:
                     f.write("\n {}: normally distributed (p = {})".format(key,round(value,2)))
@@ -402,7 +401,10 @@ def normalitytest():
     
     update_file()
 
-normalitytest()
+normalitytest(irisDataSet, t = "Overall")
+normalitytest(versicolor, t = "Versicolor")
+normalitytest(virginica, t = "Virginica")
+normalitytest(setosa, t = "Setosa")
 
 def kde_plots (a,t):
     kdeplot = sns.kdeplot (data = irisDataSet, x = a, palette="Paired",hue = "Species", fill = True)
@@ -417,43 +419,29 @@ kde_plots (irisDataSet["Petal Width"], t = "Petal Width KDE")
 
 
 def correlation ():
-    def correlationMap (x):
+    def correlationMap (x, t, s):
         plt.figure()
-        corMap = sns.heatmap(x, annot = True, cmap = "mako")
-        plt.tight_layout()
         ax = plt.axes()
+        corMap = sns.heatmap(x, annot = True, cmap = "mako")
+        ax.set_title ("{}".format(t))
         ax.set_yticklabels(labels = corMap.get_yticklabels(), fontsize = "10", va = "center")
+        plt.tight_layout()
+        plt.savefig("{}".format(s))
+        plt.close()
   
 
-    overallCorrMap = correlationMap(irisDataSet.corr(method = "pearson"))
-    ax = plt.axes()
-    title = ax.set_title("Correlation Between Numerical Variables - All Species")
-    plt.savefig("{} corr.png".format("overall"))
-    plt.close()
-  
-    versicolorCorrMap = correlationMap(versicolor.corr(method = "pearson"))
-    ax = plt.axes()
-    title= ax.set_title("Correlation Between Numerical Variables - Versicolor")
-    plt.savefig("{} corr.png".format("versicolor"))
-    plt.close()
+    overallCorrMap = correlationMap(irisDataSet.corr(method = "pearson"), t = "Correlation Map - All Species", s = "overall")
+    versicolorCorrMap = correlationMap(versicolor.corr(method = "pearson"), t = "Correlation Map - Versicolor", s = "versicolor")
+    virginicaCorrMap = correlationMap(virginica.corr(method = "pearson"), t = "Correlation Map - Virginica", s = "virginica" )
+    setosaCorrMap = correlationMap(setosa.corr(method = "pearson"), t = "Correlation Map - Setosa", s = "setosa" )
 
-    virginicaCorrMap = correlationMap(virginica.corr(method = "pearson"))
-    ax = plt.axes()
-    title = ax.set_title("Correlation Between Numerical Variables - Virginica")
-    plt.savefig("{} corr.png".format("virginica"))
-    plt.close()
-
-    setosaCorrMap = correlationMap(setosa.corr(method = "pearson"))
-    ax = plt.axes()
-    title = ax.set_title("Correlation Between Numerical Variables - Setosa")
-    plt.savefig("{} corr.png".format("setosa"))
-    plt.close()
 
 correlation()
 
 def scatterplots (a,b,x, t):
     scatterPlot = sns.scatterplot(data = irisDataSet, x=a, y=b, hue = "Species", style = "Species", s = 100, palette = "coolwarm")
     scatterPlot.set_title("{}".format(t), fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    sns.despine ()
     plt.savefig("{}.png".format(x))
     #plt.show ()
     plt.close ()

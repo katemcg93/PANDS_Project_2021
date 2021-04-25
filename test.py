@@ -36,22 +36,26 @@ def histograms():
     plt.close ()
 
     slh = sns.histplot(irisDataSet, x = "Sepal Length", element = "step", palette = "BuPu", hue = "Species")
+    sns.despine ()
     slh.set_title("Sepal Length Distribution by Species", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
     plt.savefig("Sepal length.png")
     plt.close ()
     
     swh = sns.histplot(irisDataSet, x = "Sepal Width", element = "step", palette = "BuPu", hue = "Species")
+    sns.despine ()
     swh.set_title("Sepal Width Distribution by Species", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
     plt.savefig("Sepal Width.png")
     plt.close ()
 
 
     plh = sns.histplot(irisDataSet, x = "Petal Length", element = "step", palette = "BuPu", hue = "Species")
+    sns.despine ()
     plh.set_title("Petal Length Distribution by Species", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
     plt.savefig("Petal Length.png")
     plt.close()
 
     pwh = sns.histplot(irisDataSet, x = "Petal Width", element = "step", palette = "BuPu", hue = "Species")
+    sns.despine()
     pwh.set_title("Petal Width Distribution by Species", fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
     plt.savefig("Petal Width.png")
     plt.close ()
