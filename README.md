@@ -128,13 +128,40 @@ To get a better understanding of the distribution and consistency of the data, t
 
 The program uses the Shapiro Wilk method, which is included in the scipy stats module , to test whether the data is normally distributed[9]. If the result of the Shapiro Wilk test is less than 0.05, we can reject the null hypothesis, i.e. that the data is drawn from a normal distribution. The result of the test will dicate whether parametric or non-parametric statistical tests should be used to  analyze the data. 
 
+````python
+def normalitytest(df, t):
+
+    #df is dataframe being passed to function
+    # T is title for text file
+
+    #Converting data to numpy array for normality calculation
+    swNumpy = df["Sepal Width"].to_numpy()
+    pwNumpy = df["Petal Width"].to_numpy()
+    slNumpy = df["Sepal Length"].to_numpy()
+    plNumpy = df["Petal Length"].to_numpy()
+
+    varList = [swNumpy,pwNumpy, slNumpy, plNumpy]
+
+    #Will need these lists to store test reults later in function
+    normalDist = []
+    pValues = []
+
+    for var in varList :
+        shapiro_test = stats.shapiro(var)
+        normalDist.append(shapiro_test)
+
+    #Isolating p value into own list to output to text file
+    for result in normalDist:
+        pValues.append(result[1])
+ ````
+
 #### Skewness and Kurtosis
 
 Skewness measures the symmetry of a data distribution, i.e. whether it is skewed to the left (negative) or right (positive) of the central peak. Kurtosis measures the extent to which the peak of a distribution distributes from the shape of a normal distribution. A positive kurtosis value indicates the data is heavy tailed (more data concentrated in the tails/periphery of the distribution), and conversely a positive value indicates a light tailed distribution (more data concentrated around the peak) [3][4][5]. To calculate these, the program uses built in functions that are included in the scipy stats module.
 
 #### IQR and Outliers
 
-Outliers are obtained by calculating the interquartile range (all data between the first and third quartile), multiplying this value by 1.5 and identifying all data outside of this range. Identifying outliers within the data set is a good practice as these can impact figures for mean and standard deviation, and in some cases may signify anomalies in the data that warrant further investigation. [6][7][8]
+Outliers are obtained by calculating the interquartile range (all data between the first and third quartile), multiplying this value by 1.5 and identifying all data outside of this range. Identifying outliers within the data set is a good practice as these can impact figures for mean and standard deviation, and in some cases may signify anomalies in the data that warrant further investigation. [7][8][9]
 
 ````python
     def iqrange (df):
@@ -147,6 +174,10 @@ Outliers are obtained by calculating the interquartile range (all data between t
         return totalOutliers
   ````
   
+#### Visual Representation of Data
+The programme uses the Seaborn library to create visual representations of the above calculations.
+
+Histograms provide a visual reporesentation of the data distribution, boxplots are used to display outliers within the data set and KDE (Kernel Density Estimate) plots show the probability of a random v
  
 
 ## References
@@ -156,9 +187,10 @@ Outliers are obtained by calculating the interquartile range (all data between t
 3. Kolekar, P., 2021. Chapter 8 Descriptive statistics | BioSakshat - Free Study Materials. [online] Biosakshat.github.io. Available at: <https://biosakshat.github.io/descriptive-statistics.html> [Accessed 25 April 2021].
 4. McNeese, B. and Barson, T., 2021. Are the Skewness and Kurtosis Useful Statistics?. [online] BPI Consulting. Available at: <https://www.spcforexcel.com/knowledge/basic-statistics/are-skewness-and-kurtosis-useful-statistics#:~:text=If%20the%20kurtosis%20is%20less%20than%20zero%2C%20then%20the%20distribution,the%20impact%20of%20sample%20size.> [Accessed 25 April 2021].
 5. Itl.nist.gov. 2021. 1.3.5.11. Measures of Skewness and Kurtosis. [online] Available at: <https://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm> [Accessed 25 April 2021].
-6. GeeksforGeeks. 2021. Interquartile Range to Detect Outliers in Data - GeeksforGeeks. [online] Available at: <https://www.geeksforgeeks.org/interquartile-range-to-detect-outliers-in-data/> [Accessed 25 April 2021].
-7. Singh, D. and Outliers, C., 2021. Cleaning up Data Outliers with Python | Pluralsight. [online] Pluralsight.com. Available at: <https://www.pluralsight.com/guides/cleaning-up-data-from-outliers> [Accessed 25 April 2021].
-8. Medium. 2021. Hands-on : Outlier Detection and Treatment in Python Using 1.5 IQR rule. [online] Available at: <https://medium.com/@prashant.nair2050/hands-on-outlier-detection-and-treatment-in-python-using-1-5-iqr-rule-f9ff1961a414> [Accessed 25 April 2021].
-9. Docs.scipy.org. 2021. scipy.stats.shapiro — SciPy v1.6.2 Reference Guide. [online] Available at: <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.shapiro.html> [Accessed 25 April 2021].
+6. Brownlee, J., 2021. A Gentle Introduction to Normality Tests in Python. [online] Machine Learning Mastery. Available at: <https://machinelearningmastery.com/a-gentle-introduction-to-normality-tests-in-python/> [Accessed 25 April 2021].
+7. GeeksforGeeks. 2021. Interquartile Range to Detect Outliers in Data - GeeksforGeeks. [online] Available at: <https://www.geeksforgeeks.org/interquartile-range-to-detect-outliers-in-data/> [Accessed 25 April 2021].
+8. Singh, D. and Outliers, C., 2021. Cleaning up Data Outliers with Python | Pluralsight. [online] Pluralsight.com. Available at: <https://www.pluralsight.com/guides/cleaning-up-data-from-outliers> [Accessed 25 April 2021].
+9. Medium. 2021. Hands-on : Outlier Detection and Treatment in Python Using 1.5 IQR rule. [online] Available at: <https://medium.com/@prashant.nair2050/hands-on-outlier-detection-and-treatment-in-python-using-1-5-iqr-rule-f9ff1961a414> [Accessed 25 April 2021].
+10. Docs.scipy.org. 2021. scipy.stats.shapiro — SciPy v1.6.2 Reference Guide. [online] Available at: <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.shapiro.html> [Accessed 25 April 2021].
 
 
