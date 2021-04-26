@@ -183,7 +183,7 @@ Histograms provide a visual reporesentation of the data distribution, boxplots a
 
 ### Descriptive Statistics
 
-The output from the descriptive statistics functionis given below, for both the dataset and a whole and the individual species
+The output from the descriptive statistics functionis given below, for both the dataset and a whole and the individual species.
 
 <details>
            <summary>Overall Data Set</summary>
@@ -250,6 +250,9 @@ The output from the descriptive statistics functionis given below, for both the 
 
 </p>
 </details>
+
+As may be expected, the variability is much higher in the data set as a whole than that at a species level. In particular, there is a difference of almost 7cm in the maximum and minimum values recorded for petal length, and the standard deviation for this variable is 1.77. When we look at the max and minimum values for this variable within each of the three species, the gap between them is considerably smaller, as is the standard deviation. This is also true of the other three variables, albeit to a lesser degree than petal length. This suggests that within the three species of iris plant, variable values are concentrated within a relatively narrow range.
+
 
 
  
