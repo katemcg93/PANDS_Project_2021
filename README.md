@@ -183,7 +183,7 @@ Histograms provide a visual reporesentation of the data distribution, boxplots a
 
 ### Descriptive Statistics
 
-The output from the descriptive statistics functionis given below, for both the dataset and a whole and the individual species.
+The output from the descriptive statistics function is given below, for both the dataset and a whole and the individual species.
 
 <details>
            <summary>Overall Data Set</summary>
@@ -254,6 +254,72 @@ The output from the descriptive statistics functionis given below, for both the 
 As may be expected, the variability is much higher in the data set as a whole than that at a species level. In particular, there is a difference of almost 7cm in the maximum and minimum values recorded for petal length, and the standard deviation for this variable is 1.77. When we look at the max and minimum values for this variable within each of the three species, the gap between them is considerably smaller, as is the standard deviation. This is also true of the other three variables, albeit to a lesser degree than petal length. This suggests that within the three species of iris plant, variable values are concentrated within a relatively narrow range.
 
 The output for the three species gives a better understanding of how they differ from each other. For example, we can see that the Virginica plant has the highest average values for Sepal Length, Petal Width and Petal Length. Conversely, the setosa plant has the lowest values for petal length and width, but the highest value for sepal width. Additionally, we can see the three species differ more from each other in their petal measurements than sepal. This may suggest that it would be easier to classify iris plants based on the lengh/width of their petals than their sepals. [12]
+
+### IQR and Outliers
+
+The function for calculating the interquartile range/total outliers in the data set returned the following output:
+
+<details>
+           <summary>Outliers</summary>
+           <p>
+
+      Sepal Width: Total Outliers: 4
+      Petal Width: No Outliers in data
+      Sepal Length: No Outliers in data
+      Petal Length: No Outliers in data
+
+</p>
+</details>
+
+This is also supported by the boxplots generated to visually represent the IQR. 
+
+ <p align="center">
+  Figure 3: Outliers: Overall Data Set
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Outliers%20Overall%20Dataset.png"/></br>
+  <br></br>
+</p>
+
+ <p align="center">
+  Figure 4: Outliers per Variable/Species
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Outliers%20by%20species.png"/></br>
+  <br></br>
+</p>
+
+Although the total outliers increases slightly when calculated per species, the figure still remains low (between 2 and 6% of recorded samples), and would be unlikely to skew the accuracy of statistical calculations [13]. The box plots also show a significant difference between setosa and the other two species in terms of petal measurements, and also that the range of values for these two variables is much narrower for the setosa plant. We can also see from the box plots that the three species have relatively similar median values for sepal width, which suggests that this would not be a suitable variable to classify plants into species groups [14]
+
+### Skewness and Kurtosis
+<details>
+ 
+ The function for calculating skewness/kurtosis returned the following output:
+
+           <summary>Skewness</summary>
+           <p>
+
+            Sepal Length    0.31
+            Sepal Width     0.32
+            Petal Length   -0.27
+            Petal Width    -0.10
+            dtype: float64
+
+
+</p>
+</details>
+
+<details>
+           <summary>Kurtosis</summary>
+           <p>
+
+          Sepal Length   -0.55
+          Sepal Width     0.23
+          Petal Length   -1.40
+          Petal Width    -1.34
+
+
+</p>
+</details>
+
+The skewness values for each of the four variables is between -0.5 and 0.5 which indicates the data is relatively symmetrical. The petal length and width are slightly skewed to the left and the sepal measurements are skewed slightly to the right. 
+
 ## References
 
 1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
@@ -268,6 +334,9 @@ The output for the three species gives a better understanding of how they differ
 10. Docs.scipy.org. 2021. scipy.stats.shapiro — SciPy v1.6.2 Reference Guide. [online] Available at: <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.shapiro.html> [Accessed 25 April 2021].
 11. Medium. 2021. Histograms and Density Plots in Python. [online] Available at: <https://towardsdatascience.com/histograms-and-density-plots-in-python-f6bda88f5ac0> [Accessed 26 April 2021].
 12. Medium. 2021. Exploring Classifiers with Python Scikit-learn — Iris Dataset. [online] Available at: <https://towardsdatascience.com/exploring-classifiers-with-python-scikit-learn-iris-dataset-2bcb490d2e1b> [Accessed 26 April 2021].
+13. Data Science Learner. 2021. How to Handle Outliers in Data Analysis ? Multivariate Outlier Detection. [online] Available at: <https://www.datasciencelearner.com/handle-outliers-multivariate-outlier-detection/> [Accessed 26 April 2021].
+14. Medium. 2021. Exploratory Data Analysis: Uni-variate analysis of Iris Data set. [online] Available at: <https://medium.com/analytics-vidhya/exploratory-data-analysis-uni-variate-analysis-of-iris-data-set-690c87a5cd40> [Accessed 26 April 2021].
+15. 
 
 
 
