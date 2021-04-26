@@ -222,7 +222,7 @@ The output from the descriptive statistics functionis given below, for both the 
            <summary>Virginica</summary>
            <p>
 
-       Sepal Length  Sepal Width  Petal Length  Petal Width
+               Sepal Length  Sepal Width  Petal Length  Petal Width
        count         50.00        50.00         50.00        50.00
        mean           6.59         2.97          5.55         2.03
        std            0.64         0.32          0.55         0.27
@@ -238,7 +238,7 @@ The output from the descriptive statistics functionis given below, for both the 
            <summary>Setosa</summary>
            <p>
 
-             Sepal Length  Sepal Width  Petal Length  Petal Width
+              Sepal Length  Sepal Width  Petal Length  Petal Width
       count         50.00        50.00         50.00        50.00
       mean           5.01         3.42          1.46         0.24
       std            0.35         0.38          0.17         0.11
@@ -253,10 +253,7 @@ The output from the descriptive statistics functionis given below, for both the 
 
 As may be expected, the variability is much higher in the data set as a whole than that at a species level. In particular, there is a difference of almost 7cm in the maximum and minimum values recorded for petal length, and the standard deviation for this variable is 1.77. When we look at the max and minimum values for this variable within each of the three species, the gap between them is considerably smaller, as is the standard deviation. This is also true of the other three variables, albeit to a lesser degree than petal length. This suggests that within the three species of iris plant, variable values are concentrated within a relatively narrow range.
 
-
-
- 
-
+The output for the three species gives a better understanding of how they differ from each other. For example, we can see that the Virginica plant has the highest average values for Sepal Length, Petal Width and Petal Length. Conversely, the setosa plant has the lowest values for petal length and width, but the highest value for sepal width. Additionally, we can see the three species differ more from each other in their petal measurements than sepal. This may suggest that it would be easier to classify iris plants based on the lengh/width of their petals than their sepals. [12]
 ## References
 
 1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
@@ -270,6 +267,7 @@ As may be expected, the variability is much higher in the data set as a whole th
 9. Medium. 2021. Hands-on : Outlier Detection and Treatment in Python Using 1.5 IQR rule. [online] Available at: <https://medium.com/@prashant.nair2050/hands-on-outlier-detection-and-treatment-in-python-using-1-5-iqr-rule-f9ff1961a414> [Accessed 25 April 2021].
 10. Docs.scipy.org. 2021. scipy.stats.shapiro — SciPy v1.6.2 Reference Guide. [online] Available at: <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.shapiro.html> [Accessed 25 April 2021].
 11. Medium. 2021. Histograms and Density Plots in Python. [online] Available at: <https://towardsdatascience.com/histograms-and-density-plots-in-python-f6bda88f5ac0> [Accessed 26 April 2021].
-12. 
+12. Medium. 2021. Exploring Classifiers with Python Scikit-learn — Iris Dataset. [online] Available at: <https://towardsdatascience.com/exploring-classifiers-with-python-scikit-learn-iris-dataset-2bcb490d2e1b> [Accessed 26 April 2021].
+
 
 
