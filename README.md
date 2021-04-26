@@ -177,7 +177,81 @@ Outliers are obtained by calculating the interquartile range (all data between t
 #### Visual Representation of Data
 The programme uses the Seaborn library to create visual representations of the above calculations.
 
-Histograms provide a visual reporesentation of the data distribution, boxplots are used to display outliers within the data set and KDE (Kernel Density Estimate) plots show the probability of a random v
+Histograms provide a visual reporesentation of the data distribution, boxplots are used to display outliers within the data set and KDE (Kernel Density Estimate) plots are generated to illustrate the probability density functions for each variable (the probability that a random variable within the data set will equal a given value on the KDE curve). 
+
+## Output/Interpretation of data
+
+### Descriptive Statistics
+
+The output from the descriptive statistics functionis given below, for both the dataset and a whole and the individual species
+
+<details>
+           <summary>Overall Data Set</summary>
+           <p>
+
+             Sepal Length  Sepal Width  Petal Length  Petal Width
+    count        150.00       150.00        150.00       150.00
+    mean           5.84         3.06          3.76         1.20
+    std            0.83         0.44          1.77         0.76
+    min            4.30         2.00          1.00         0.10
+    25%            5.10         2.80          1.60         0.30
+    50%            5.80         3.00          4.35         1.30
+    75%            6.40         3.30          5.10         1.80
+    max            7.90         4.40          6.90         2.50
+
+</p>
+</details>
+
+<details>
+           <summary>Versicolor</summary>
+           <p>
+
+       Sepal Length  Sepal Width  Petal Length  Petal Width
+       count         50.00        50.00         50.00        50.00
+       mean           5.94         2.77          4.26         1.33
+       std            0.52         0.31          0.47         0.20
+       min            4.90         2.00          3.00         1.00
+       25%            5.60         2.52          4.00         1.20
+       50%            5.90         2.80          4.35         1.30
+       75%            6.30         3.00          4.60         1.50
+       max            7.00         3.40          5.10         1.80
+</p>
+</details>
+
+<details>
+           <summary>Virginica</summary>
+           <p>
+
+       Sepal Length  Sepal Width  Petal Length  Petal Width
+       count         50.00        50.00         50.00        50.00
+       mean           6.59         2.97          5.55         2.03
+       std            0.64         0.32          0.55         0.27
+       min            4.90         2.20          4.50         1.40
+       25%            6.22         2.80          5.10         1.80
+       50%            6.50         3.00          5.55         2.00
+       75%            6.90         3.18          5.88         2.30
+       max            7.90         3.80          6.90         2.50
+</p>
+</details>
+
+<details>
+           <summary>Setosa</summary>
+           <p>
+
+             Sepal Length  Sepal Width  Petal Length  Petal Width
+      count         50.00        50.00         50.00        50.00
+      mean           5.01         3.42          1.46         0.24
+      std            0.35         0.38          0.17         0.11
+      min            4.30         2.30          1.00         0.10
+      25%            4.80         3.12          1.40         0.20
+      50%            5.00         3.40          1.50         0.20
+      75%            5.20         3.68          1.58         0.30
+      max            5.80         4.40          1.90         0.60
+
+</p>
+</details>
+
+
  
 
 ## References
@@ -192,5 +266,7 @@ Histograms provide a visual reporesentation of the data distribution, boxplots a
 8. Singh, D. and Outliers, C., 2021. Cleaning up Data Outliers with Python | Pluralsight. [online] Pluralsight.com. Available at: <https://www.pluralsight.com/guides/cleaning-up-data-from-outliers> [Accessed 25 April 2021].
 9. Medium. 2021. Hands-on : Outlier Detection and Treatment in Python Using 1.5 IQR rule. [online] Available at: <https://medium.com/@prashant.nair2050/hands-on-outlier-detection-and-treatment-in-python-using-1-5-iqr-rule-f9ff1961a414> [Accessed 25 April 2021].
 10. Docs.scipy.org. 2021. scipy.stats.shapiro — SciPy v1.6.2 Reference Guide. [online] Available at: <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.shapiro.html> [Accessed 25 April 2021].
+11. Medium. 2021. Histograms and Density Plots in Python. [online] Available at: <https://towardsdatascience.com/histograms-and-density-plots-in-python-f6bda88f5ac0> [Accessed 26 April 2021].
+12. 
 
 
