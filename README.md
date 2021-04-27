@@ -409,6 +409,32 @@ However, once delineated based on species group, the data is closer in appearanc
 
 Again, the exception to this is petal width/length for the setosa plant. Rather than following a bell curve distribution, the petal length/width values for this species are heavily concentrated within a narrow range of values. The petal width/length variables also seems to have less overlap between species than their sepal counterparts, again suggesting that plants could be more easily classified by their petal measurements. 
 
+
+## KDE Plots
+
+KDE plots were generated as an accompaniment to the histograms. The two plot types are very similar, but the KDE gives a clearer, less cluttered view of the data distribution curve for each of the three species simultaneously. The plot is interpreted as follows: the x axis represents recorded values for the variables, and plot (area under the curve), which must add up to 1, tells us the probability of seeing a variable at any point along the x axis [17].
+
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Petal%20Length%20KDE.png"/></br>
+  <br></br>
+</p>
+
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Petal%20Width%20KDE.png"/></br>
+  <br></br>
+</p>
+
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Sepal%20Length%20KDE.png"/></br>
+  <br></br>
+</p>
+
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Sepal%20Width%20KDE.png"/></br>
+  <br></br>
+</p>
+
+
 ## References
 
 1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
@@ -426,6 +452,8 @@ Again, the exception to this is petal width/length for the setosa plant. Rather 
 13. Data Science Learner. 2021. How to Handle Outliers in Data Analysis ? Multivariate Outlier Detection. [online] Available at: <https://www.datasciencelearner.com/handle-outliers-multivariate-outlier-detection/> [Accessed 26 April 2021].
 14. Medium. 2021. Exploratory Data Analysis: Uni-variate analysis of Iris Data set. [online] Available at: <https://medium.com/analytics-vidhya/exploratory-data-analysis-uni-variate-analysis-of-iris-data-set-690c87a5cd40> [Accessed 26 April 2021].
 15. Medium. 2021. Skew and Kurtosis: 2 Important Statistics terms you need to know in Data Science. [online] Available at: <https://codeburst.io/2-important-statistics-terms-you-need-to-know-in-data-science-skewness-and-kurtosis-388fef94eeaa> [Accessed 27 April 2021].
+16.  Seaborn.pydata.org. 2021. seaborn.kdeplot — seaborn 0.11.1 documentation. [online] Available at: <https://seaborn.pydata.org/generated/seaborn.kdeplot.html> [Accessed 27 April 2021].
+17.  Medium. 2021. Histograms and Kernels Density Estimates. [online] Available at: <https://medium.com/@dcomp/histograms-and-kernels-density-estimates-a2c41eb08de3> [Accessed 27 April 2021].
 
 
 
