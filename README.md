@@ -288,11 +288,10 @@ This is also supported by the boxplots generated to visually represent the IQR.
 Although the total outliers increases slightly when calculated per species, the figure still remains low (between 2 and 6% of recorded samples), and would be unlikely to skew the accuracy of statistical calculations [13]. The box plots also show a significant difference between setosa and the other two species in terms of petal measurements, and also that the range of values for these two variables is much narrower for the setosa plant. We can also see from the box plots that the three species have relatively similar median values for sepal width, which suggests that this would not be a suitable variable to classify plants into species groups [14]
 
 ### Skewness and Kurtosis
-<details>
  
  The function for calculating skewness/kurtosis returned the following output:
-
-           <summary>Skewness</summary>
+ <details>
+ <summary>Skewness</summary>
            <p>
 
             Sepal Length    0.31
