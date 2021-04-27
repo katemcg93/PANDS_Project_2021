@@ -424,6 +424,8 @@ KDE plots were generated as an accompaniment to the histograms. The two plot typ
   <br></br>
 </p>
 
+For the petal width and length variables, we can see that the peak of the KDE curve is much higher in the setosa species than that of the virginica/versicolor plants, but the range of values is significantly narrower. Based on this curve, we can conclude it is highly probable that iris-setosa plants will have a sepal length of between 0 and 0.5 cm, with around 0.25 cm being the most probable value. In contrast, the virginica and versicolor plant curver have a more gradual peak, cover a wdider area and the probability density does not exceed 0.3 at any given point for either variable. As well as indicating that versicolor and virginica plants in general have longer petals, this plot also illustrates a greater range of values within these species.
+
  <p>
   <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Sepal%20Length%20KDE.png"/></br>
   <br></br>
@@ -434,8 +436,7 @@ KDE plots were generated as an accompaniment to the histograms. The two plot typ
   <br></br>
 </p>
 
-
-## References
+The KDE plots for sepal length and width again show considerable overlap between the species. In particular, for sepal width the versicolor and virginica species have very similar curves. However, the setosa plant occupies notably higher values on the x axis, suggesting it would be easy to distinguish setosa based on sepal width but it would be difficult to classify virginica/versicolor plants based on this value.   We can again see a steeper, narrower curve for the setosa plant, suggesting less variety in sepal length values for this species, although it is much less pronounced than the petal length/width KDE plots. The lower peak KDE values for these plots suggests that the setosa plant has a greater range of values for sepal length and width. 
 
 1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
 2. Medium. 2021. The Iris Dataset — A Little Bit of History and Biology. [online] Available at: <https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5> [Accessed 24 April 2021].
