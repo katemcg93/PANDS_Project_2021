@@ -321,6 +321,58 @@ The skewness values for each of the four variables is between -0.5 and 0.5 which
 
 The kurtosis for sepal length and width are relatively low, suggesting the data is close to a normal distrubution. Conversely, the petal length/width variables have negative kurtosis values, indicating that they have less outliers than the normal distribution (light-tailed).
 
+### Normality Testing
+Normality for the data set as a whole and for each species returned the following output:
+
+<details>
+           <summary>Overall</summary>
+           <p>
+
+         Sepal Width: normally distributed (p = 0.1)
+         Petal Width: not normally distributed (p = 0)
+         Sepal Length: not normally distributed (p = 0)
+         Petal Length: not normally distributed (p = 0)
+
+</p>
+</details>
+
+<details>
+           <summary>Versicolor</summary>
+           <p>
+
+          Sepal Width: normally distributed (p = 0.34)
+          Petal Width: not normally distributed (p = 0)
+          Sepal Length: normally distributed (p = 0.46)
+          Petal Length: normally distributed (p = 0.16)
+
+</p>
+</details>
+
+
+<details>
+           <summary>Virginica</summary>
+           <p>
+
+        Sepal Width: normally distributed (p = 0.18)
+        Petal Width: normally distributed (p = 0.09)
+        Sepal Length: normally distributed (p = 0.26)
+        Petal Length: normally distributed (p = 0.11)
+
+</p>
+</details>
+
+<details>
+           <summary>Setosa</summary>
+           <p>
+
+        Sepal Width: normally distributed (p = 0.18)
+        Petal Width: normally distributed (p = 0.09)
+        Sepal Length: normally distributed (p = 0.26)
+        Petal Length: normally distributed (p = 0.11)
+
+</p>
+</details>
+
 
 ## References
 
