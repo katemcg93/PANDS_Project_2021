@@ -251,7 +251,7 @@ The output from the descriptive statistics function is given below, for both the
 </p>
 </details>
 
-As may be expected, the variability is much higher in the data set as a whole than that at a species level. In particular, there is a difference of almost 7cm in the maximum and minimum values recorded for petal length, and the standard deviation for this variable is 1.77. When we look at the max and minimum values for this variable within each of the three species, the gap between them is considerably smaller, as is the standard deviation. This is also true of the other three variables, albeit to a lesser degree than petal length. This suggests that within the three species of iris plant, variable values are concentrated within a relatively narrow range.
+As may be expected, the range is wider in the data set as a whole than that at a species level. In particular, there is a difference of almost 7cm in the maximum and minimum values recorded for petal length, and the standard deviation for this variable is 1.77. When we look at the max and minimum values for this variable within each of the three species, the gap between them is considerably smaller, as is the standard deviation. This is also true of the other three variables, albeit to a lesser degree than petal length. This suggests that within the three species of iris plant, variable values are concentrated within a relatively narrow range.
 
 The output for the three species gives a better understanding of how they differ from each other. For example, we can see that the Virginica plant has the highest average values for Sepal Length, Petal Width and Petal Length. Conversely, the setosa plant has the lowest values for petal length and width, but the highest value for sepal width. Additionally, we can see the three species differ more from each other in their petal measurements than sepal. This may suggest that it would be easier to classify iris plants based on the lengh/width of their petals than their sepals. [12]
 
@@ -318,7 +318,10 @@ Although the total outliers increases slightly when calculated per species, the 
 </p>
 </details>
 
-The skewness values for each of the four variables is between -0.5 and 0.5 which indicates the data is relatively symmetrical. The petal length and width are slightly skewed to the left and the sepal measurements are skewed slightly to the right. 
+The skewness values for each of the four variables is between -0.5 and 0.5 which indicates the data is relatively symmetrical. The petal length and width are slightly skewed to the left and the sepal measurements are skewed slightly to the right. The low values for petal length/width in the setosa species is likely causing the negative skew.
+
+The kurtosis for sepal length and width are relatively low, suggesting the data is close to a normal distrubution. Conversely, the petal length/width variables have negative kurtosis values, indicating that they have less outliers than the normal distribution (light-tailed).
+
 
 ## References
 
@@ -336,7 +339,7 @@ The skewness values for each of the four variables is between -0.5 and 0.5 which
 12. Medium. 2021. Exploring Classifiers with Python Scikit-learn — Iris Dataset. [online] Available at: <https://towardsdatascience.com/exploring-classifiers-with-python-scikit-learn-iris-dataset-2bcb490d2e1b> [Accessed 26 April 2021].
 13. Data Science Learner. 2021. How to Handle Outliers in Data Analysis ? Multivariate Outlier Detection. [online] Available at: <https://www.datasciencelearner.com/handle-outliers-multivariate-outlier-detection/> [Accessed 26 April 2021].
 14. Medium. 2021. Exploratory Data Analysis: Uni-variate analysis of Iris Data set. [online] Available at: <https://medium.com/analytics-vidhya/exploratory-data-analysis-uni-variate-analysis-of-iris-data-set-690c87a5cd40> [Accessed 26 April 2021].
-15. 
+15. Medium. 2021. Skew and Kurtosis: 2 Important Statistics terms you need to know in Data Science. [online] Available at: <https://codeburst.io/2-important-statistics-terms-you-need-to-know-in-data-science-skewness-and-kurtosis-388fef94eeaa> [Accessed 27 April 2021].
 
 
 
