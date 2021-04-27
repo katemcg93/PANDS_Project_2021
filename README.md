@@ -365,14 +365,49 @@ Normality for the data set as a whole and for each species returned the followin
            <summary>Setosa</summary>
            <p>
 
-        Sepal Width: normally distributed (p = 0.18)
-        Petal Width: normally distributed (p = 0.09)
-        Sepal Length: normally distributed (p = 0.26)
-        Petal Length: normally distributed (p = 0.11)
+           Sepal Width: normally distributed (p = 0.2)
+           Petal Width: not normally distributed (p = 0)
+           Sepal Length: normally distributed (p = 0.46)
+           Petal Length: normally distributed (p = 0.05)
 
 </p>
 </details>
 
+When analyzed as a whole, three of the four variables do not follow a normal distribution. However, when separated by species the data is more likely to be normally distributed. An exception to this is petal length/width for the setosa plant. Petal width is not normally distributed ( = 0), and the p-value for petal length is p = 0.05, meaning we are close to also rejecting the null hypothesis for this variable.
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/histoverall.png"/></br>
+  <br></br>
+</p>
+
+
+The sepal width/length distributions are much closer to normality than the petal measurements.
+
+However, once delineated based on species group, the data is closer in appearance to a bell curve for each of the four variables. 
+
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Petal%20Length.png"/></br>
+  <br></br>
+</p>
+
+
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Petal%20Width.png"/></br>
+  <br></br>
+</p>
+
+
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Sepal%20length.png"/></br>
+  <br></br>
+</p>
+
+
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Sepal%20Width.png"/></br>
+  <br></br>
+</p>
+
+Again, the exception to this is petal width/length for the setosa plant. Rather than following a bell curve distribution, the petal length/width values for this species are heavily concentrated within a narrow range of values. The petal width/length variables also seems to have less overlap between species than their sepal counterparts, again suggesting that plants could be more easily classified by their petal measurements. 
 
 ## References
 
