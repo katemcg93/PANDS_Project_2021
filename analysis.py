@@ -111,8 +111,6 @@ def descriptivestats ():
     skew = irisDataSet.skew()
     kt = irisDataSet.kurtosis(axis = 0)
 
-    print(kt)
-
 #Writing results of output to summary text file
 #First creating headings using = symbol to make file easier to read
 #using \n to skip lines
@@ -607,7 +605,7 @@ def compare_means_no_ev (x,y,h):
     else:
         print("Not significant ")
 
-#This code uses the mann whitney test and will be run for variables that don't follow a normal distribution, i.e. petal width variables
+#This code uses the mann whitney test and will be run for variables that don't follow a normal distribution, i.e. petal width
 def compare_means_non_para (x,y, h):
     result = stats.mannwhitneyu(x, y)
     print("{}".format(h))
