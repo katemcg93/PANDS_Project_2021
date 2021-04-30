@@ -463,11 +463,11 @@ The next component of this analysis aims to determine the degree to which the fo
 
 <p> The above questions are applied to the dataset as a whole, and each of the three species groups. Correlation co-efficients are assessed using Pearson's method. This test measures the relationship/association between two continuous variables, i.e. a variable that can take on a countless/infinite set of values. As the iris data set is recording values for length/width, the variables would fall into this cateogry as the potential values for these are infinite [18]. The test will produce a value ranging between 1 and -1, with 1 being a perfect positive correlation and -1 being a perfect negative correlation. If the value produced is between 0.5 and 1.0, it can be considered a strong positive correlation. If the value is between -0.5 and -1.0, it can be considered a strong negative corrrelation. </p>
 
-### Heat Maps <br></br>
+### Heat Maps <br> </br>
 
 <p>Heat maps are used to illustrate these calculations as they provide an effective visual impression of the correlation between variables. A heatmap is a coloured grid, with each square on the grid representing a pair of variables. A graduated colour scheme is used, and the color of the square illustrates the strength of the relationship between the variables.[19][20]</p>
 
-Additionally, this programme overlays the correlation coefficient on the grid to make the plot easier to interpret. <br>
+Additionally, this programme overlays the correlation coefficient on the grid to make the plot easier to interpret. <br> </br>
 
 The code to generate these plots is as follows:
 
@@ -485,7 +485,7 @@ The code to generate these plots is as follows:
   ````
 The function takes three arguments: x is the data to plot, t is the title and s is the name under which the png image of the plot should be saved. <b>
  
- ### Pair Plots and Scatter Plots<br></br>
+ ### Pair Plots and Scatter Plots<br> </br>
  
  In addition to the heat maps, the programme generates scatter and pair plots to illustrate the relationship between the pairs of variables.<br></br>
  
