@@ -706,7 +706,7 @@ The correlation output for the entire data set was markedly different from that 
 The final component of the analysis, which compared mean values between groups, found significant differences between all the species. This indicates that each of the three species groups have their own distinct characteristics in terms of flower shape/size.
 
 ## Learnings/Potential Improvements
-During this project, I got a high-level introduction into data analysis for Python and what can be achieved using the libraries built for this purpose. I was able to leverage the statistics modules I covered in previous undergraduate/postgraduate studies and learn how to carry out these tests using the Scipy module.
+During this project, I got a high-level introduction to data analysis for Python and what can be achieved using the libraries built for this purpose. I was able to leverage the statistics modules I covered in previous undergraduate/postgraduate studies and learn how to carry out these tests using the Scipy module.
 
 One area that I didn't cover in this project was machine learning due to time constraints. During my research I encountered several examples of people using the scikit-learn module to model the iris data set, and testing their model using the Train Test method, where 20% of the data is used to train the model to recognize patterns, and 80% is used to test it [26][27][28]. I think this would be a beneficial exercise for me to revisit when I've become mroe familiar with Python and data modelling. 
 ## References <br></br>
