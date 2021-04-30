@@ -382,7 +382,7 @@ When analyzed as a whole, three of the four variables do not follow a normal dis
 
 The sepal width/length distributions are much closer to normality than the petal measurements.
 
-However, once delineated based on species group, the data is closer in appearance to a bell curve for each of the four variables. 
+However, once delineated by species group, the data is closer in appearance to a bell curve for each of the four variables. 
 
  <p>
   <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Petal%20Length.png"/></br>
