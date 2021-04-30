@@ -438,6 +438,19 @@ For the petal width and length variables, we can see that the peak of the KDE cu
 
 The KDE plots for sepal length and width again show considerable overlap between the species. In particular, for sepal width the versicolor and virginica species have very similar curves. However, the setosa plant occupies notably higher values on the x axis, suggesting it would be easy to distinguish setosa based on sepal width but it would be difficult to classify virginica/versicolor plants based on this value.   We can again see a steeper, narrower curve for the setosa plant, suggesting less variety in sepal length values for this species, although it is much less pronounced than the petal length/width KDE plots. The lower peak KDE values for these plots suggests that the setosa plant has a greater range of values for sepal length and width. 
 
+## Summary Part 1 <br>
+
+The exploratory analysis of the data set yielded the following insights:
+- When taken as a whole, the numerical variables do not follow a normal distribution. However, when the same tests were run on the three species individually the variables were, for the most part, normally distributed. The exception to this is was petal width. For this variable, only the virginica species was normally distributed. 
+- The range of potential values in petal width and length is very narrow for each of the three species relative to the sepal width/length measurements. This is most pronounced in the setosa species, with the majority of samples falling between 0 and 0.5 for petal width and 1 and 1.5 for petal length
+- There is considerable overlap between the three species in terms of sepal length/width distribution. This overlap is not present to the same degree in the petal length/width variables, meaning that it may be easier to classify species members based on these values
+- The total outliers is low, suggesting that petal/sepal measurements for these three species tend to fall within a defined range of values<br>
+</br>
+- This analysis also gives a high-level understanding of the different characteristics of the species
+   - The Setosa species has the narrowest/shortest petals but the widest sepals
+   - The Virginica species has the longest sepals and the longest/widest petals
+   - The Versicolor species is between Setosa/Virginica for all variables
+
 ## References
 1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
 2. Medium. 2021. The Iris Dataset — A Little Bit of History and Biology. [online] Available at: <https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5> [Accessed 24 April 2021].
