@@ -452,18 +452,18 @@ This analysis also gives a high-level understanding of the different characteris
    - The Virginica species has the longest sepals and the longest/widest petals.
    - The Versicolor species is between Setosa/Virginica for all variables.
 
-## Part 2: Correlation between Variables
+## Part 2: Correlation between Variables <br></br>
 
 The next component of this analysis aims to determine the degree to which the four numerical variables influence each other, i.e.:
 1. Is there a positive/negative correlation between each pair of variables?
 2. How strong is the correlation?
 
 
-### Pearson's Correlation Method
+### Pearson's Correlation Method <br></br>
 
 <p> The above questions are applied to the dataset as a whole, and each of the three species groups. Correlation co-efficients are assessed using Pearson's method. This test measures the relationship/association between two continuous variables, i.e. a variable that can take on a countless/infinite set of values. As the iris data set is recording values for length/width, the variables would fall into this cateogry as the potential values for these are infinite [18]. The test will produce a value ranging between 1 and -1, with 1 being a perfect positive correlation and -1 being a perfect negative correlation. If the value produced is between 0.5 and 1.0, it can be considered a strong positive correlation. If the value is between -0.5 and -1.0, it can be considered a strong negative corrrelation. </p>
 
-### Heat Maps
+### Heat Maps <br></br>
 
 <p>Heat maps are used to illustrate these calculations as they provide an effective visual impression of the correlation between variables. A heatmap is a coloured grid, with each square on the grid representing a pair of variables. A graduated colour scheme is used, and the color of the square illustrates the strength of the relationship between the variables.[19][20]</p>
 
@@ -544,6 +544,8 @@ def scatterplots (a,b,x, t):
 ### Findings/Interpretation <br></br>
 - The correlation map for the overall dataset shows a negative correlation between sepal width and petal width/length. This is likely caused by the setosa plant which has the widest sepals and narrowest/shortest petals.
 - These negative correlations are non-existent in the individual species maps, suggesting that at a species level sepal width does not negatively influence petal width or length.
+- The overall correlation map shows a near-perfect correlation between petal length/width. This is also evident in the scatter plot; this variable pair output is the closer to a straight line than any of the others.
+- However, 
 - Within the overall data set there is a strong positive correlation between sepal length and petal length/width. This is likely due to the versicolor plant having the longest sepals and longest/widest petals: as sepal length increases so do the petal measurements. 
 - This relationship is also evident in the scatter plots for these variable pairs; these plots are closest to a straight line of all variable combinations. 
 - The strong positive association between petal length and sepal length is also present in the versicolor and virginica plants, but not for setosa. This suggests that within the first two species groups, longer petals also indicate longer sepals, but this is not necessarily the case for setosa plants. This is clearly visible in the scatter plots, a linear relationship seems to exist between the former but not the latter.
