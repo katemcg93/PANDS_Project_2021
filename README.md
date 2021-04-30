@@ -553,12 +553,162 @@ def scatterplots (a,b,x, t):
 
 The final part of this program aims to quantify the extent to which the three species differ from each other in terms of their morphology, using parametric (t-tests) and non parametric (Mann Whitney U) tests. 
 
- #### Levene's test </br></br>
- Before carrying out t tests to compare mean values between species, the assumptions associated with it should be tested. These are normality, which was tested in Part 1 of the analysis, and equality of variances (the spread/distribution around the mean should be equal in both samples).
+### Levene's test </br></br>
+Before carrying out t tests to compare mean values between species, the assumptions associated with it should be tested. These are normality, which was tested in Part 1 of the analysis, and equality of variances (the spread/distribution around the mean should be equal in both samples) [23]
  
-Levene's test can be used to assess equality of variances between two or more groups; this test is available in the scipy stats module. The null hypothesis for Levene's test is that the variance between the groups is equal; if the p value returned is less than 0.05, we must reject the null hypothesis and assume inequality of variances [23]
+Levene's test can be used to assess equality of variances between two or more groups; this test is available in the scipy stats module. The null hypothesis for Levene's test is that the variance between the groups is equal; if the p value returned is less than 0.05, we must reject the null hypothesis and assume inequality of variances [24]
 
- 
+````python
+def levenes_test(x, y):
+    result = stats.levene(x,y)
+    #print(result)
+    if result[1] <0.05:
+        return False
+    else:
+        return True
+
+  ````
+The above function returns a boolean value of True if the null hypothesis is true, and False if the null hypothesis is rejected. This was run for each pair of variable/species combination, printed the results to the console.
+  
+  ````python
+#Called function for each species/variable combination
+#Printed returned values and used these to determine whether equal variances could be assumed
+
+setVirgSW = levenes_test(setosa["Sepal Width"], virginica["Sepal Width"])
+setVirgSL = levenes_test(setosa["Sepal Length"], virginica["Sepal Length"])
+setVirgPW = levenes_test(setosa["Petal Width"], virginica["Petal Width"])
+setVirgPL = levenes_test(setosa["Petal Length"], virginica["Petal Length"])
+#print(setVirgPL,setVirgSL,setVirgSW,setVirgPW)
+  ````
+Based on the results of Levene's test, one of three tests was used to compare mean values between species pairs:
+
+### 1. Independent Samples T-Test
+
+This was used if both groups were normally distributed and Levene's test showed equality of variances.
+
+````python
+def compare_means_ev (x,y,h):
+    result = stats.ttest_ind(x, y)
+    print("{}".format(h))
+    print(result)
+    if result [1] < 0.05:
+        print("Significant difference")
+    
+    else:
+        print("Not significant ")
+````
+The function takes three arguments: x and y, the two groups to be compared and h, a heading stating the variable and species names being analysed. This is to make the output, which was printed to the console, easier to understand.
+
+### 2. Welch's t-test.
+
+This was used for groups that were normally distributed but with unequal variances.
+
+```python
+def compare_means_no_ev (x,y,h):
+    result = stats.ttest_ind(x, y, equal_var=False)
+    print("{}".format(h))
+    print(result)
+    if result [1] < 0.05:
+        print("Significant difference")
+    
+    else:
+        print("Not significant ")
+```
+This is similar to the first test, except equal_var is set to False (default is true). By setting this to False, the test used is changed from the independent samples t-test to Welch's t-test, which does not assume equal variances. 
+
+### 3. Mann Whitney U Test
+
+This is a non parametric test, and in this programme is for groups of variables where one or more of the groups being tested does not follow a normal distribution.
+
+ ````python
+ def compare_means_non_para (x,y, h):
+    result = stats.mannwhitneyu(x, y)
+    print("{}".format(h))
+    print(result)
+    if result [1] < 0.05:
+        print("Significant difference")
+    
+    else:
+        print("Not significant ")
+````
+
+### Output
+The output of the above functions is as follows:
+<details>
+           <summary>Setosa vs Virginica</summary>
+           <p>
+
+          Virginica and Setosa - Sepal Width
+          Ttest_indResult(statistic=6.289384996672061, pvalue=9.586039170379162e-09)
+          Significant difference
+          Virginica and Setosa - Sepal Length
+          Ttest_indResult(statistic=-15.386195820079404, pvalue=3.9668672709859296e-25)
+          Significant difference
+          Virginica and Setosa - Petal Width
+          MannwhitneyuResult(statistic=0.0, pvalue=1.3346292078190177e-18)
+          Significant difference
+          Virginica and Setosa - Petal Length
+          Ttest_indResult(statistic=-49.965703359355636, pvalue=9.713867061697096e-50)
+          Significant difference
+
+</p>
+</details>
+
+<details>
+           <summary>Versicolor vs Setosa</summary>
+           <p>
+
+           Versicolor and Setosa - Sepal Width
+           Ttest_indResult(statistic=9.282772555558111, pvalue=4.362239016010214e-15)
+           Significant difference
+           Versicolor and Setosa - Sepal Length
+           Ttest_indResult(statistic=-10.52098626754911, pvalue=3.746742613983842e-17)
+           Significant difference
+           Versicolor and Setosa - Petal Width
+           MannwhitneyuResult(statistic=0.0, pvalue=1.2540530397624869e-18)
+           Significant difference
+           Versicolor and Setosa - Petal Length
+           Ttest_indResult(statistic=-39.46866259397271, pvalue=1.057210030060334e-45)
+
+</p>
+</details>
+
+<details>
+           <summary>Versicolor vs Setosa</summary>
+           <p>
+
+          Virginica and Setosa - Sepal Width
+          Ttest_indResult(statistic=-3.2057607502218186, pvalue=0.0018191004238894803)
+          Significant difference
+          Virginica and Setosa - Sepal Length
+          Ttest_indResult(statistic=-5.629165259719801, pvalue=1.7248563024547942e-07)
+          Significant difference
+          Virginica and Setosa - Petal Width
+          MannwhitneyuResult(statistic=49.0, pvalue=4.8490227224570924e-17)
+          Significant difference
+          Virginica and Setosa - Petal Length
+          Ttest_indResult(statistic=-12.603779441384987, pvalue=4.900287527398095e-22)
+          Significant difference
+</p>
+</details>
+
+## Interpretation
+The p values of the above tests are all considerably lower than 0.05. This indicates a significant difference in mean sepal width, sepal length, petal length and petal width between each of the three species. Therefore, we can conclude based on this analysis that the three species differ markedly from each other in terms of their flower morphology.
+
+## Conclusion
+
+The aim of this analysis was to describe the dataset using Python, in terms of its characteristics, relationships between the variables and the degree to which the three species groups differ from each other. 
+
+In terms of distrubtion, we can see that the data is generally normally distributed, with low skewness and kurtosis values indicating the data is symmetrical and light tailed. The low volume of outliers suggests that petal and sepal measurements within the species generally fall within a defined range. The exploratory analysis also gave an insight into the morphological characteristics of the species.
+
+The correlation output for the entire data set was markedly different from that for the individual species groups, suggesting that trends seen within the data as a whole are not necessarily evident within species groups. 
+
+The final component of the analysis, which compared mean values between groups, found significant differences between all the species. This indicates that each of the three species groups have their own distinct characteristics in terms of flower shape/size.
+
+## Learnings/Potential Improvements
+During this project, I got a high-level introduction into data analysis for Python and what can be achieved using the libraries built for this purpose. I was able to leverage the statistics modules I covered in previous undergraduate/postgraduate studies and learn how to carry out these tests using the Scipy module.
+
+One area that I didn't cover in this project was machine learning due to time constraints. During my research I encountered several examples of people using the scikit-learn module to model the iris data set, and testing their model using the Train Test method, where 20% of the data is used to train the model to recognize patterns, and 80% is used to test it [26][27][28]. I think this would be a beneficial exercise for me to revisit when I've become mroe familiar with Python and data modelling. 
 ## References <br></br>
 1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
 2. Medium. 2021. The Iris Dataset — A Little Bit of History and Biology. [online] Available at: <https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5> [Accessed 24 April 2021].
@@ -582,7 +732,11 @@ Levene's test can be used to assess equality of variances between two or more gr
 20.  Stack Abuse. 2021. Seaborn Library for Data Visualization in Python: Part 2. [online] Available at: <https://stackabuse.com/seaborn-library-for-data-visualization-in-python-part-2/> [Accessed 30 April 2021].
 21.  Texasgateway.org. 2021. Interpreting Scatterplots | Texas Gateway. [online] Available at: <https://www.texasgateway.org/resource/interpreting-scatterplots> [Accessed 30 April 2021].
 22.  Medium. 2021. Visualizing Data with Pairs Plots in Python. [online] Available at: <https://towardsdatascience.com/visualizing-data-with-pair-plots-in-python-f228cf529166#:~:text=A%20pairs%20plot%20allows%20us,are%20easily%20implemented%20in%20Python!> [Accessed 30 April 2021].
-23.  Spss-tutorials.com. 2021. Levene's Test - Quick Introduction. [online] Available at: <https://www.spss-tutorials.com/levenes-test-in-spss/> [Accessed 30 April 2021].
-24.  
+23.Python for Data Science. 2021. T-test (Iris Data Set). [online] Available at: <https://pythonfordatascienceorg.wordpress.com/independent-t-test-python/> [Accessed 30 April 2021].
+24.  Spss-tutorials.com. 2021. Levene's Test - Quick Introduction. [online] Available at: <https://www.spss-tutorials.com/levenes-test-in-spss/> [Accessed 30 April 2021].
+25.  Docs.scipy.org. 2021. scipy.stats.ttest_ind — SciPy v1.6.3 Reference Guide. [online] Available at: <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html> [Accessed 30 April 2021].
+26.  Kaggle.com. 2021. Machine Learning with Iris Dataset. [online] Available at: <https://www.kaggle.com/jchen2186/machine-learning-with-iris-dataset> [Accessed 30 April 2021].
+27. SnapLogic. 2021. Iris Classification Demo | SnapLogic. [online] Available at: <https://www.snaplogic.com/machine-learning-showcase/iris-flower-classification> [Accessed 30 April 2021].
+28.  ritchieng.github.io. 2021. Iris Dataset. [online] Available at: <https://www.ritchieng.com/machine-learning-iris-dataset/> [Accessed 30 April 2021].
 
 
