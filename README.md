@@ -544,13 +544,21 @@ def scatterplots (a,b,x, t):
 ### Findings/Interpretation <br></br>
 - The correlation map for the overall dataset shows a negative correlation between sepal width and petal width/length. This is likely caused by the setosa plant which has the widest sepals and narrowest/shortest petals.
 - These negative correlations are non-existent in the individual species maps, suggesting that at a species level sepal width does not negatively influence petal width or length.
-- The overall correlation map shows a near-perfect correlation between petal length/width. This is also evident in the scatter plot; this variable pair output is the closer to a straight line than any of the others.
-- However, 
+- The overall correlation map shows a near-perfect correlation between petal length/width. This is also evident in the scatter plot; this variable pair output is the closer to a straight line than any of the others. This is likely because while the versicolor plant has both the longest and widest petals, setosa has both the narrowest and shortest. Therefore, within the data set as a whole, long petals is likely to also mean wide petals and vice versa. 
+- However, within the three species, versicolor is the only group that maintains a strong correlation between these variables. This is also visible on the scatterplot; although the datapoints as a unit form a straight line, the plot doesn't appear to be linear within the setosa/versicolor species. 
 - Within the overall data set there is a strong positive correlation between sepal length and petal length/width. This is likely due to the versicolor plant having the longest sepals and longest/widest petals: as sepal length increases so do the petal measurements. 
 - This relationship is also evident in the scatter plots for these variable pairs; these plots are closest to a straight line of all variable combinations. 
 - The strong positive association between petal length and sepal length is also present in the versicolor and virginica plants, but not for setosa. This suggests that within the first two species groups, longer petals also indicate longer sepals, but this is not necessarily the case for setosa plants. This is clearly visible in the scatter plots, a linear relationship seems to exist between the former but not the latter.
 - Within the setosa species group, a strong correlation exists between sepal length and width, to a much greater extent than the other two groups. It can therefore be assumed that longer sepals are associated with with increased sepal width within this species group. 
 
+## Part 3: Compare Mean Values between Variables/Species Groups <br></br>
+
+The final part of this program aims to quantify the extent to which the three species differ from each other in terms of their morphology, using parametric (t-tests) and non parametric (Mann Whitney U) tests. 
+
+ #### Levene's test </br></br>
+ Before carrying out t tests to compare mean values between species, the assumptions associated with it should be tested. These are normality, which was tested in Part 1 of the analysis, and equality of variances (the spread/distribution around the mean should be equal in both samples).
+ 
+ Levene's test can be used to assess equality of variances between two or more groups; this test is available in the scipy stats module. The null hypothesis for Levene's test is that the variance between the groups is equal; if the p value returned is less than 0.05, we must reject the null hypothesis and assume inequality of variances. 
 
  
 ## References <br></br>
@@ -576,7 +584,7 @@ def scatterplots (a,b,x, t):
 20.  Stack Abuse. 2021. Seaborn Library for Data Visualization in Python: Part 2. [online] Available at: <https://stackabuse.com/seaborn-library-for-data-visualization-in-python-part-2/> [Accessed 30 April 2021].
 21.  Texasgateway.org. 2021. Interpreting Scatterplots | Texas Gateway. [online] Available at: <https://www.texasgateway.org/resource/interpreting-scatterplots> [Accessed 30 April 2021].
 22.  Medium. 2021. Visualizing Data with Pairs Plots in Python. [online] Available at: <https://towardsdatascience.com/visualizing-data-with-pair-plots-in-python-f228cf529166#:~:text=A%20pairs%20plot%20allows%20us,are%20easily%20implemented%20in%20Python!> [Accessed 30 April 2021].
-23.  
+23.  Spss-tutorials.com. 2021. Levene's Test - Quick Introduction. [online] Available at: <https://www.spss-tutorials.com/levenes-test-in-spss/> [Accessed 30 April 2021].
 
 
 
