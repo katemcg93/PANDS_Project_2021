@@ -441,12 +441,13 @@ The KDE plots for sepal length and width again show considerable overlap between
 ## Summary Part 1 <br>
 
 The exploratory analysis of the data set yielded the following insights:
-- When taken as a whole, the numerical variables do not follow a normal distribution. However, when the same tests were run on the three species individually the variables were, for the most part, normally distributed. The exception to this is was petal width. For this variable, only the virginica species was normally distributed. 
-- The range of potential values in petal width and length is very narrow for each of the three species relative to the sepal width/length measurements. This is most pronounced in the setosa species, with the majority of samples falling between 0 and 0.5 for petal width and 1 and 1.5 for petal length
-- There is considerable overlap between the three species in terms of sepal length/width distribution. This overlap is not present to the same degree in the petal length/width variables, meaning that it may be easier to classify species members based on these values
-- The total outliers is low, suggesting that petal/sepal measurements for these three species tend to fall within a defined range of values<br>
+ - When taken as a whole, the numerical variables do not follow a normal distribution. However, when the same tests were run on the three species individually the variables were, for the most part, normally distributed. The exception to this is was petal width. For this variable, only the virginica species was normally distributed. 
+ - The range of potential values in petal width and length is very narrow for each of the three species relative to the sepal width/length measurements. This is most pronounced in the setosa species, with the majority of samples falling between 0 and 0.5 for petal width and 1 and 1.5 for petal length
+ - There is considerable overlap between the three species in terms of sepal length/width distribution. This overlap is not present to the same degree in the petal length/width variables, meaning that it may be easier to classify species members based on these values
+ - The total outliers is low, suggesting that petal/sepal measurements for these three species tend to fall within a defined range of values<br>
 </br>
-- This analysis also gives a high-level understanding of the different characteristics of the species
+
+This analysis also gives a high-level understanding of the different characteristics of the species:
    - The Setosa species has the narrowest/shortest petals but the widest sepals
    - The Virginica species has the longest sepals and the longest/widest petals
    - The Versicolor species is between Setosa/Virginica for all variables
