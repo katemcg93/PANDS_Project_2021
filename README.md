@@ -72,7 +72,7 @@ To organize my findings, I have identified three key research questions:
 2. Does any relationship, positive or negative, exist between the four variables?
 3. Is there a significant difference in variable values between the three species?
 
-The first question is answered using histograms, descriptive statistics, normality testing and the identification of outliers. The second is addressed using correlation heatmaps and scatter plots,to visually represent the degree to which the variables influence each other. The final question is addressed by comparing the mean value of each variable at the species level. 
+The first question is answered using histograms, descriptive statistics, normality testing and the identification of outliers. The second is addressed using correlation heatmaps and scatter plots,to visually represent the degree to which the variables influence each other. To answer the final question, parametric and non-parametric statistical tests are used to compare mean variable values between the species groups. 
 
 ## Part 1: Features of the Data Set
 
