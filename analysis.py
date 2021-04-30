@@ -485,7 +485,7 @@ kde_plots (irisDataSet["Petal Width"], t = "Petal Width KDE")
 def correlation ():
     def correlationMap (x, t, s):
         plt.figure()
-        # Calling axes to get 
+        # Calling axes so that tick labels can be added, to make the maps easier to interpret
         ax = plt.axes()
         corMap = sns.heatmap(x, annot = True, cmap = "mako")
         ax.set_title ("{}".format(t))
@@ -502,6 +502,16 @@ def correlation ():
 
 
 correlation()
+
+#Below function is plotting each pair of variables against each other to graphically display the relationship between them
+#If correlation is high, would expect that the scatteplot would resemble a line graph
+#Separating the data by species to get an idea of both the overall relationship and the correlation between variables within species groups
+#The function will output the scatterplots and also save them
+#Function takes 4 arguments
+    #a is the data to be plotted on x axis
+    #b corresponds to y axis
+    #x is the name to save the plot as
+    #t is the title
 
 def scatterplots (a,b,x, t):
     scatterPlot = sns.scatterplot(data = irisDataSet, x=a, y=b, hue = "Species", style = "Species", s = 100, palette = "coolwarm")
@@ -521,6 +531,8 @@ species_pl_sw = scatterplots(petalLength,sepalLength, x = "petallength_sepalengt
 species_sw_pl = scatterplots(petalWidth,petalLength, x = "petalwidth_petallength", t = "Correlation: Petal Width vs Petal Length" )
 species_pl_sw = scatterplots(petalLength,petalWidth, x = "petallength_petalwidth", t = "Correlation: Petal Length vs Petal Width" )
 
+# The pair plot outputs scatter plots for each pair of variables within sub plots
+# This plot will be used in the readme rather than the individual scatter plots as it gives an instantaneous view of all variable pair relationships
 def pairplot ():
     pairplot = sns.pairplot(irisDataSet, hue = "Species", palette = "coolwarm")
     plt.savefig("pairplot.png")
@@ -528,6 +540,17 @@ def pairplot ():
 
 pairplot()
 
+# Last part of analysis is determining whether mean values for the numerical variables differ significantly between the species
+# Independent samples t test (parametric) and mann whitney (non-parametric) tests are used to compare means
+# Independent samples t test has two assumptions: normality and equal variance
+# Levene's test is to determine whether or not the test should be run assuming equal variances
+# Results from the normality testing earlier in the programme will be used to determine whether mann-whitney or independent samples test should be run
+
+
+# Levene's test function takes two arguments
+# x and y are the data sets to compare
+# The test returns True if the p value is > 0.05 which means equal variances can be assumed
+# Otherwise, the test returns false, must reject null hypothesis that variances are equal
 def levenes_test(x, y):
     result = stats.levene(x,y)
     #print(result)
@@ -536,6 +559,9 @@ def levenes_test(x, y):
     else:
         return True
     
+#Called function for each species/variable combination
+#Printed returned values and used these to determine whether equal variances could be assumed
+
 setVirgSW = levenes_test(setosa["Sepal Width"], virginica["Sepal Width"])
 setVirgSL = levenes_test(setosa["Sepal Length"], virginica["Sepal Length"])
 setVirgPW = levenes_test(setosa["Petal Width"], virginica["Petal Width"])
@@ -554,8 +580,15 @@ verVirgPW = levenes_test(virginica["Petal Width"], versicolor["Petal Width"])
 verVirgPL = levenes_test(virginica["Petal Length"], versicolor["Petal Length"])
 #print(verVirgSW,verVirgSL,verVirgPL,verVirgPW)
 
-def compare_means_ev (x,y):
+#This code will be run for pairs of variables where equal variances may be assumed
+#Function takes two arguments, x, y and h, where x and y are the two data sets to be compared 
+#and h is a heading to make the test output easier to interpret
+#If p value is less than 0.05, the test result and "significant difference" is outputted to the console
+# Otherwise "not significant" is outputted
+
+def compare_means_ev (x,y,h):
     result = stats.ttest_ind(x, y)
+    print("{}".format(h))
     print(result)
     if result [1] < 0.05:
         print("Significant difference")
@@ -563,8 +596,21 @@ def compare_means_ev (x,y):
     else:
         print("Not significant ")
 
-def compare_means_no_ev (x,y):
+#This code will be run for pairs of variables where Levene's test showed unequal variance
+def compare_means_no_ev (x,y,h):
     result = stats.ttest_ind(x, y, equal_var=False)
+    print("{}".format(h))
+    print(result)
+    if result [1] < 0.05:
+        print("Significant difference")
+    
+    else:
+        print("Not significant ")
+
+#This code uses the mann whitney test and will be run for variables that don't follow a normal distribution, i.e. petal width variables
+def compare_means_non_para (x,y, h):
+    result = stats.mannwhitneyu(x, y)
+    print("{}".format(h))
     print(result)
     if result [1] < 0.05:
         print("Significant difference")
@@ -574,20 +620,20 @@ def compare_means_no_ev (x,y):
 
     
 
-sigSetVirgSW = compare_means_no_ev(setosa["Sepal Width"], virginica["Sepal Width"])
-sigsetVirgSL = compare_means_no_ev(setosa["Sepal Length"], virginica["Sepal Length"])
-sigsetVirgPW = compare_means_ev(setosa["Petal Width"], virginica["Petal Width"])
-sigsetVirgPL = compare_means_no_ev(setosa["Petal Length"], virginica["Petal Length"])
+sigSetVirgSW = compare_means_no_ev(setosa["Sepal Width"], virginica["Sepal Width"], h = "Virginica and Setosa - Sepal Width")
+sigsetVirgSL = compare_means_no_ev(setosa["Sepal Length"], virginica["Sepal Length"], h = "Virginica and Setosa - Sepal Length")
+sigsetVirgPW = compare_means_non_para(setosa["Petal Width"], virginica["Petal Width"], h = "Virginica and Setosa - Petal Width")
+sigsetVirgPL = compare_means_no_ev(setosa["Petal Length"], virginica["Petal Length"], h = "Virginica and Setosa - Petal Length")
 
-sigSetVersSW = compare_means_ev(setosa["Sepal Width"], versicolor["Sepal Width"])
-sigSetVersSL = compare_means_no_ev(setosa["Sepal Length"], versicolor["Sepal Length"])
-sigsetVersPW = compare_means_ev(setosa["Petal Width"], versicolor["Petal Width"])
-sigsetVersSPL= compare_means_no_ev(setosa["Petal Length"], versicolor["Petal Length"])
+sigSetVersSW = compare_means_ev(setosa["Sepal Width"], versicolor["Sepal Width"], h = "Versicolor and Setosa - Sepal Width")
+sigSetVersSL = compare_means_no_ev(setosa["Sepal Length"], versicolor["Sepal Length"], h = "Versicolor and Setosa - Sepal Length")
+sigsetVersPW = compare_means_non_para(setosa["Petal Width"], versicolor["Petal Width"], h = "Versicolor and Setosa - Petal Width")
+sigsetVersSPL= compare_means_no_ev(setosa["Petal Length"], versicolor["Petal Length"], h = "Versicolor and Setosa - Petal Length")
 
-sigVerVirgSW = compare_means_ev(versicolor["Sepal Width"], virginica["Sepal Width"])
-sigVerVirgSL = compare_means_ev(versicolor["Sepal Length"], virginica["Sepal Length"])
-sigsVerVirgPW = compare_means_ev(versicolor["Petal Width"], virginica["Petal Width"])
-sigsVerVirgPL = compare_means_no_ev(versicolor["Petal Length"], virginica["Petal Length"])
+sigVerVirgSW = compare_means_ev(versicolor["Sepal Width"], virginica["Sepal Width"], h = "Virginica and Setosa - Sepal Width")
+sigVerVirgSL = compare_means_ev(versicolor["Sepal Length"], virginica["Sepal Length"], h = "Virginica and Setosa - Sepal Length")
+sigsVerVirgPW = compare_means_non_para(versicolor["Petal Width"], virginica["Petal Width"], h = "Virginica and Setosa - Petal Width")
+sigsVerVirgPL = compare_means_no_ev(versicolor["Petal Length"], virginica["Petal Length"],h = "Virginica and Setosa - Petal Length" )
 
 
 
