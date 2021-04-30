@@ -45,7 +45,7 @@ Its author, Sir Ronald Fisher, was a celebrated statistician and geneticist. Oth
 <p align="center">
   <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/Fisher.PNG?raw=true" alt="Sir Ronald Fisher"/></br>
  <br> 
- Figure 1: Sir Ronald Fisher. Source: Wikimedia Commons
+ Figure 1: Sir Ronald Fisher. Source: [Wikimedia Commons] https://commons.wikimedia.org/wiki/Category:Ronald_Fisher#/media/File:Youngronaldfisher2.JPG
 </p>
 
 The Iris Data Set consists of 50 samples from three species of Iris flower: Iris Versicolor, Iris Virgninica and Iris Setosa. </br>
