@@ -485,14 +485,30 @@ The code to generate these plots is as follows:
   ````
 The function takes three arguments: x is the data to plot, t is the title and s is the name under which the png image of the plot should be saved. <b>
  
- ### Pair Plots and Scatter Plots
+ ### Pair Plots and Scatter Plots<br></br>
  
- In addition to the heat maps, the programme generates scatter and pair plots to illustrate the relationship between the pairs of variables.
+ In addition to the heat maps, the programme generates scatter and pair plots to illustrate the relationship between the pairs of variables.<br></br>
  
- Scatter plots 
+Scatter plots display a relationship between two datasets, and each dot on the plot represents a single data point (value for sample at x and y axis). The closer the relationship between the variables, the more the plot will resemble a straight line [21]. 
+
+This programme plots each pair of variables against each other in scatter plots. The hue and style keyword arguments are used to distinguish the three species groups; hue changes the colour to match species and style changes the type used for data points. The programme outputs the scatter plots when run and saves them.
+
+````python
+def scatterplots (a,b,x, t):
+    scatterPlot = sns.scatterplot(data = irisDataSet, x=a, y=b, hue = "Species", style = "Species", s = 100, palette = "coolwarm")
+    scatterPlot.set_title("{}".format(t), fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    sns.despine ()
+    plt.savefig("{}.png".format(x))
+    plt.show ()
+    plt.close ()
+    return scatterPlot
+
+  ````
+ In addition to generating individual scatter plots for pairs of variables, the programme creates a pair plot to display the scatter plots together. The main advantages of pair plots are that they show relationships between/distribution of variables simultaneously, allowing us to quickly interpret the data set. [22]
  
  ## Output
  
+ ### Correlation Maps
  The output of the four resulting correlation maps is given below:
   <p>
   <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/overall.png"/></br>
@@ -512,6 +528,19 @@ The function takes three arguments: x is the data to plot, t is the title and s 
   <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/setosa.png"/></br>
   <br></br>
 </p>
+
+### Sample Scatter Plot
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/petalwidth_petallength.png"/></br>
+  <br></br>
+</p>
+
+### Pair Plot
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/pairplot.png"/></br>
+  <br></br>
+</p>
+
  
 ## References
 1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
@@ -534,7 +563,9 @@ The function takes three arguments: x is the data to plot, t is the title and s 
 18.  Rpubs.com. 2021. RPubs - Chapter 1 Iris. [online] Available at: <https://rpubs.com/brendanon/351253> [Accessed 30 April 2021].
 19.  Kaggle.com. 2021. Seaborn plot to visualize Iris data. [online] Available at: <https://www.kaggle.com/rakesh6184/seaborn-plot-to-visualize-iris-data> [Accessed 30 April 2021].
 20.  Stack Abuse. 2021. Seaborn Library for Data Visualization in Python: Part 2. [online] Available at: <https://stackabuse.com/seaborn-library-for-data-visualization-in-python-part-2/> [Accessed 30 April 2021].
-21.  
+21.  Texasgateway.org. 2021. Interpreting Scatterplots | Texas Gateway. [online] Available at: <https://www.texasgateway.org/resource/interpreting-scatterplots> [Accessed 30 April 2021].
+22.  Medium. 2021. Visualizing Data with Pairs Plots in Python. [online] Available at: <https://towardsdatascience.com/visualizing-data-with-pair-plots-in-python-f228cf529166#:~:text=A%20pairs%20plot%20allows%20us,are%20easily%20implemented%20in%20Python!> [Accessed 30 April 2021].
+23.  
 
 
 
