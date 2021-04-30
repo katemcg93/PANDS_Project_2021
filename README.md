@@ -484,9 +484,7 @@ The code to generate these plots is as follows:
         plt.close()
   ````
 The function takes three arguments: x is the data to plot, t is the title and s is the name under which the png image of the plot should be saved. <b>
- 
- ### Pair Plots and Scatter Plots<br> </br>
- 
+  
 In addition to the heat maps, the programme generates scatter and pair plots to illustrate the relationship between the pairs of variables.<br></br>
  
 Scatter plots display a relationship between two datasets, and each dot on the plot represents a single data point (value for sample at x and y axis). The closer the relationship between the variables, the more the plot will resemble a straight line [21]. 
