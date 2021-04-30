@@ -506,9 +506,9 @@ def scatterplots (a,b,x, t):
   ````
  In addition to generating individual scatter plots for pairs of variables, the programme creates a pair plot to display the scatter plots together. The main advantages of pair plots are that they show relationships between/distribution of variables simultaneously, allowing us to quickly interpret the data set. [22]
  
- ## Output
+ ## Output <br></br>
  
- ### Correlation Maps
+ ### Correlation Maps <br></br>
  The output of the four resulting correlation maps is given below:
   <p>
   <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/overall.png"/></br>
@@ -529,20 +529,29 @@ def scatterplots (a,b,x, t):
   <br></br>
 </p>
 
-### Sample Scatter Plot
+### Sample Scatter Plot <br></br>
  <p>
   <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/petalwidth_petallength.png"/></br>
   <br></br>
 </p>
 
-### Pair Plot
+### Pair Plot <br></br>
  <p>
   <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/pairplot.png"/></br>
   <br></br>
 </p>
 
+### Findings/Interpretation <br></br>
+- The correlation map for the overall dataset shows a negative correlation between sepal width and petal width/length. This is likely caused by the setosa plant which has the widest sepals and narrowest/shortest petals.
+- These negative correlations are non-existent in the individual species maps, suggesting that at a species level sepal width does not negatively influence petal width or length.
+- Within the overall data set there is a strong positive correlation between sepal length and petal length/width. This is likely due to the versicolor plant having the longest sepals and longest/widest petals: as sepal length increases so do the petal measurements. 
+- This relationship is also evident in the scatter plots for these variable pairs; these plots are closest to a straight line of all variable combinations. 
+- The strong positive association between petal length and sepal length is also present in the versicolor and virginica plants, but not for setosa. This suggests that within the first two species groups, longer petals also indicate longer sepals, but this is not necessarily the case for setosa plants. This is clearly visible in the scatter plots, a linear relationship seems to exist between the former but not the latter.
+- Within the setosa species group, a strong correlation exists between sepal length and width, to a much greater extent than the other two groups. It can therefore be assumed that longer sepals are associated with with increased sepal width within this species group. 
+
+
  
-## References
+## References <br></br>
 1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
 2. Medium. 2021. The Iris Dataset — A Little Bit of History and Biology. [online] Available at: <https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5> [Accessed 24 April 2021].
 3. Kolekar, P., 2021. Chapter 8 Descriptive statistics | BioSakshat - Free Study Materials. [online] Biosakshat.github.io. Available at: <https://biosakshat.github.io/descriptive-statistics.html> [Accessed 25 April 2021].
