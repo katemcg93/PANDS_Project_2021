@@ -483,7 +483,7 @@ The code to generate these plots is as follows:
         plt.savefig("{}".format(s))
         plt.close()
   ````
-The function takes three arguments: x is the data to plot, t is the title and s is the name under which the png image of the plot should be saved. <b>
+The function takes three arguments: x is the data to plot, t is the title and s is the name under which the png image of the plot should be saved. <br></br>
   
 In addition to the heat maps, the programme generates scatter and pair plots to illustrate the relationship between the pairs of variables.<br></br>
  
