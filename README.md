@@ -448,10 +448,58 @@ The exploratory analysis of the data set yielded the following insights:
 </br>
 
 This analysis also gives a high-level understanding of the different characteristics of the species:
-   - The Setosa species has the narrowest/shortest petals but the widest sepals
-   - The Virginica species has the longest sepals and the longest/widest petals
-   - The Versicolor species is between Setosa/Virginica for all variables
+   - The Setosa species has the narrowest/shortest petals but the widest sepals.
+   - The Virginica species has the longest sepals and the longest/widest petals.
+   - The Versicolor species is between Setosa/Virginica for all variables.
 
+## Part 2: Correlation between Variables
+
+The next component of this analysis aims to determine the degree to which the four numerical variables influence each other, i.e.:
+1. Is there a positive/negative correlation between each pair of variables?
+2. How strong is the correlation?
+
+<p> The above questions are applied to the dataset as a whole, and each of the three species groups. Correlation co-efficients are assessed using Pearson's method. This test measures the relationship/association between two continuous variables, i.e. a variable that can take on a countless/infinite set of values. As the iris data set is recording values for length/width, the variables would fall into this cateogry as the potential values for these are infinite [18]. The test will produce a value ranging between 1 and -1, with 1 being a perfect positive correlation and -1 being a perfect negative correlation. If the value produced is between 0.5 and 1.0, it can be considered a strong positive correlation. If the value is between -0.5 and -1.0, it can be considered a strong negative corrrelation. </p>
+
+<p>Heat maps are used to illustrate these calculations as they provide an effective visual impression of the correlation between variables. A heatmap is a coloured grid, with each square on the grid representing a pair of variables. A graduated colour scheme is used, and the color of the square illustrates the strength of the relationship between the variables.[19][20]</p>
+
+Additionally, this programme overlays the correlation coefficient on the grid to make the plot easier to interpret. <br>
+
+The code to generate these plots is as follows:
+
+````python
+    def correlationMap (x, t, s):
+        plt.figure()
+        # Calling axes so that tick labels can be added, to make the maps easier to interpret
+        ax = plt.axes()
+        corMap = sns.heatmap(x, annot = True, cmap = "mako")
+        ax.set_title ("{}".format(t))
+        ax.set_yticklabels(labels = corMap.get_yticklabels(), fontsize = "10", va = "center")
+        plt.tight_layout()
+        plt.savefig("{}".format(s))
+        plt.close()
+  ````
+The function takes three arguments, x is the data to plot, t is the title and s is the name under which the png image of the plot should be saved. <b>
+ 
+ The output of the four resulting correlation maps is given below:
+  <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/overall.png"/></br>
+  <br></br>
+</p>
+
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/virginica.png"/></br>
+  <br></br>
+</p>
+  <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/versicolor.png"/></br>
+  <br></br>
+</p>
+
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/setosa.png"/></br>
+  <br></br>
+</p>
+ 
 ## References
 1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
 2. Medium. 2021. The Iris Dataset — A Little Bit of History and Biology. [online] Available at: <https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5> [Accessed 24 April 2021].
@@ -470,6 +518,10 @@ This analysis also gives a high-level understanding of the different characteris
 15. Medium. 2021. Skew and Kurtosis: 2 Important Statistics terms you need to know in Data Science. [online] Available at: <https://codeburst.io/2-important-statistics-terms-you-need-to-know-in-data-science-skewness-and-kurtosis-388fef94eeaa> [Accessed 27 April 2021].
 16.  Seaborn.pydata.org. 2021. seaborn.kdeplot — seaborn 0.11.1 documentation. [online] Available at: <https://seaborn.pydata.org/generated/seaborn.kdeplot.html> [Accessed 27 April 2021].
 17.  Medium. 2021. Histograms and Kernels Density Estimates. [online] Available at: <https://medium.com/@dcomp/histograms-and-kernels-density-estimates-a2c41eb08de3> [Accessed 27 April 2021].
+18.  Rpubs.com. 2021. RPubs - Chapter 1 Iris. [online] Available at: <https://rpubs.com/brendanon/351253> [Accessed 30 April 2021].
+19.  Kaggle.com. 2021. Seaborn plot to visualize Iris data. [online] Available at: <https://www.kaggle.com/rakesh6184/seaborn-plot-to-visualize-iris-data> [Accessed 30 April 2021].
+20.  Stack Abuse. 2021. Seaborn Library for Data Visualization in Python: Part 2. [online] Available at: <https://stackabuse.com/seaborn-library-for-data-visualization-in-python-part-2/> [Accessed 30 April 2021].
+21.  
 
 
 
