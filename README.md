@@ -438,7 +438,278 @@ For the petal width and length variables, we can see that the peak of the KDE cu
 
 The KDE plots for sepal length and width again show considerable overlap between the species. In particular, for sepal width the versicolor and virginica species have very similar curves. However, the setosa plant occupies notably higher values on the x axis, suggesting it would be easy to distinguish setosa based on sepal width but it would be difficult to classify virginica/versicolor plants based on this value.   We can again see a steeper, narrower curve for the setosa plant, suggesting less variety in sepal length values for this species, although it is much less pronounced than the petal length/width KDE plots. The lower peak KDE values for these plots suggests that the setosa plant has a greater range of values for sepal length and width. 
 
-## References
+## Summary Part 1 <br>
+
+The exploratory analysis of the data set yielded the following insights:
+ - When taken as a whole, the numerical variables do not follow a normal distribution. However, when the same tests were run on the three species individually the variables were, for the most part, normally distributed. The exception to this is was petal width. For this variable, only the virginica species was normally distributed. 
+ - The range of potential values in petal width and length is very narrow for each of the three species relative to the sepal width/length measurements. This is most pronounced in the setosa species, with the majority of samples falling between 0 and 0.5 for petal width and 1 and 1.5 for petal length
+ - There is considerable overlap between the three species in terms of sepal length/width distribution. This overlap is not present to the same degree in the petal length/width variables, meaning that it may be easier to classify species members based on these values
+ - The total outliers is low, suggesting that petal/sepal measurements for these three species tend to fall within a defined range of values<br>
+</br>
+
+This analysis also gives a high-level understanding of the different characteristics of the species:
+   - The Setosa species has the narrowest/shortest petals but the widest sepals.
+   - The Virginica species has the longest sepals and the longest/widest petals.
+   - The Versicolor species is between Setosa/Virginica for all variables.
+
+## Part 2: Correlation between Variables <br></br>
+
+The next component of this analysis aims to determine the degree to which the four numerical variables influence each other, i.e.:
+1. Is there a positive/negative correlation between each pair of variables?
+2. How strong is the correlation?
+
+
+### Pearson's Correlation Method <br></br>
+
+<p> The above questions are applied to the dataset as a whole, and each of the three species groups. Correlation co-efficients are assessed using Pearson's method. This test measures the relationship/association between two continuous variables, i.e. a variable that can take on a countless/infinite set of values. As the iris data set is recording values for length/width, the variables would fall into this cateogry as the potential values for these are infinite [18]. The test will produce a value ranging between 1 and -1, with 1 being a perfect positive correlation and -1 being a perfect negative correlation. If the value produced is between 0.5 and 1.0, it can be considered a strong positive correlation. If the value is between -0.5 and -1.0, it can be considered a strong negative corrrelation. </p>
+
+### Heat Maps <br> </br>
+
+<p>Heat maps are used to illustrate these calculations as they provide an effective visual impression of the correlation between variables. A heatmap is a coloured grid, with each square on the grid representing a pair of variables. A graduated colour scheme is used, and the color of the square illustrates the strength of the relationship between the variables.[19][20]</p>
+
+Additionally, this programme overlays the correlation coefficient on the grid to make the plot easier to interpret. <br> </br>
+
+The code to generate these plots is as follows:
+
+````python
+    def correlationMap (x, t, s):
+        plt.figure()
+        # Calling axes so that tick labels can be added, to make the maps easier to interpret
+        ax = plt.axes()
+        corMap = sns.heatmap(x, annot = True, cmap = "mako")
+        ax.set_title ("{}".format(t))
+        ax.set_yticklabels(labels = corMap.get_yticklabels(), fontsize = "10", va = "center")
+        plt.tight_layout()
+        plt.savefig("{}".format(s))
+        plt.close()
+  ````
+The function takes three arguments: x is the data to plot, t is the title and s is the name under which the png image of the plot should be saved. <br></br>
+  
+In addition to the heat maps, the programme generates scatter and pair plots to illustrate the relationship between the pairs of variables.<br></br>
+ 
+Scatter plots display a relationship between two datasets, and each dot on the plot represents a single data point (value for sample at x and y axis). The closer the relationship between the variables, the more the plot will resemble a straight line [21]. 
+
+This programme plots each pair of variables against each other in scatter plots. The hue and style keyword arguments are used to distinguish the three species groups; hue changes the colour to match species and style changes the type used for data points. The programme outputs the scatter plots when run and saves them.
+
+````python
+def scatterplots (a,b,x, t):
+    scatterPlot = sns.scatterplot(data = irisDataSet, x=a, y=b, hue = "Species", style = "Species", s = 100, palette = "coolwarm")
+    scatterPlot.set_title("{}".format(t), fontsize = 20, pad = 20, va = "center", fontstyle = "oblique")
+    sns.despine ()
+    plt.savefig("{}.png".format(x))
+    plt.show ()
+    plt.close ()
+    return scatterPlot
+
+  ````
+ In addition to generating individual scatter plots for pairs of variables, the programme creates a pair plot to display the scatter plots together. The main advantages of pair plots are that they show relationships between/distribution of variables simultaneously, allowing us to quickly interpret the data set. [22]
+ 
+ ## Output <br></br>
+ 
+ ### Correlation Maps <br></br>
+ The output of the four resulting correlation maps is given below:
+  <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/overall.png"/></br>
+  <br></br>
+</p>
+
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/virginica.png"/></br>
+  <br></br>
+</p>
+  <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/versicolor.png"/></br>
+  <br></br>
+</p>
+
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/setosa.png"/></br>
+  <br></br>
+</p>
+
+### Sample Scatter Plot <br></br>
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/petalwidth_petallength.png"/></br>
+  <br></br>
+</p>
+
+### Pair Plot <br></br>
+ <p>
+  <img src="https://github.com/katemcg93/PANDS_Project_2021/blob/main/pairplot.png"/></br>
+  <br></br>
+</p>
+
+### Findings/Interpretation <br></br>
+- The correlation map for the overall dataset shows a negative correlation between sepal width and petal width/length. This is likely caused by the setosa plant which has the widest sepals and narrowest/shortest petals.
+- These negative correlations are non-existent in the individual species maps, suggesting that at a species level sepal width does not negatively influence petal width or length.
+- The overall correlation map shows a near-perfect correlation between petal length/width. This is also evident in the scatter plot; this variable pair output is the closer to a straight line than any of the others. This is likely because while the versicolor plant has both the longest and widest petals, setosa has both the narrowest and shortest. Therefore, within the data set as a whole, long petals is likely to also mean wide petals and vice versa. 
+- However, within the three species, versicolor is the only group that maintains a strong correlation between these variables. This is also visible on the scatterplot; although the datapoints as a unit form a straight line, the plot doesn't appear to be linear within the setosa/versicolor species. 
+- Within the overall data set there is a strong positive correlation between sepal length and petal length/width. This is likely due to the versicolor plant having the longest sepals and longest/widest petals: as sepal length increases so do the petal measurements. 
+- This relationship is also evident in the scatter plots for these variable pairs; these plots are closest to a straight line of all variable combinations. 
+- The strong positive association between petal length and sepal length is also present in the versicolor and virginica plants, but not for setosa. This suggests that within the first two species groups, longer petals also indicate longer sepals, but this is not necessarily the case for setosa plants. This is clearly visible in the scatter plots, a linear relationship seems to exist between the former but not the latter.
+- Within the setosa species group, a strong correlation exists between sepal length and width, to a much greater extent than the other two groups. It can therefore be assumed that longer sepals are associated with with increased sepal width within this species group. 
+
+## Part 3: Compare Mean Values between Variables/Species Groups <br></br>
+
+The final part of this program aims to quantify the extent to which the three species differ from each other in terms of their morphology, using parametric (t-tests) and non parametric (Mann Whitney U) tests. 
+
+### Levene's test </br></br>
+Before carrying out t tests to compare mean values between species, the assumptions associated with it should be tested. These are normality, which was tested in Part 1 of the analysis, and equality of variances (the spread/distribution around the mean should be equal in both samples) [23]
+ 
+Levene's test can be used to assess equality of variances between two or more groups; this test is available in the scipy stats module. The null hypothesis for Levene's test is that the variance between the groups is equal; if the p value returned is less than 0.05, we must reject the null hypothesis and assume inequality of variances [24]
+
+````python
+def levenes_test(x, y):
+    result = stats.levene(x,y)
+    #print(result)
+    if result[1] <0.05:
+        return False
+    else:
+        return True
+
+  ````
+The above function returns a boolean value of True if the null hypothesis is true, and False if the null hypothesis is rejected. This was run for each pair of variable/species combination, printed the results to the console.
+  
+  ````python
+#Called function for each species/variable combination
+#Printed returned values and used these to determine whether equal variances could be assumed
+
+setVirgSW = levenes_test(setosa["Sepal Width"], virginica["Sepal Width"])
+setVirgSL = levenes_test(setosa["Sepal Length"], virginica["Sepal Length"])
+setVirgPW = levenes_test(setosa["Petal Width"], virginica["Petal Width"])
+setVirgPL = levenes_test(setosa["Petal Length"], virginica["Petal Length"])
+#print(setVirgPL,setVirgSL,setVirgSW,setVirgPW)
+  ````
+Based on the results of Levene's test, one of three tests was used to compare mean values between species pairs:
+
+### 1. Independent Samples T-Test
+
+This was used if both groups were normally distributed and Levene's test showed equality of variances.
+
+````python
+def compare_means_ev (x,y,h):
+    result = stats.ttest_ind(x, y)
+    print("{}".format(h))
+    print(result)
+    if result [1] < 0.05:
+        print("Significant difference")
+    
+    else:
+        print("Not significant ")
+````
+The function takes three arguments: x and y, the two groups to be compared and h, a heading stating the variable and species names being analysed. This is to make the output, which was printed to the console, easier to understand.
+
+### 2. Welch's t-test.
+
+This was used for groups that were normally distributed but with unequal variances.
+
+```python
+def compare_means_no_ev (x,y,h):
+    result = stats.ttest_ind(x, y, equal_var=False)
+    print("{}".format(h))
+    print(result)
+    if result [1] < 0.05:
+        print("Significant difference")
+    
+    else:
+        print("Not significant ")
+```
+This is similar to the first test, except equal_var is set to False (default is true). By setting this to False, the test used is changed from the independent samples t-test to Welch's t-test, which does not assume equal variances. 
+
+### 3. Mann Whitney U Test
+
+This is a non parametric test, and in this programme is for groups of variables where one or more of the groups being tested does not follow a normal distribution.
+
+ ````python
+ def compare_means_non_para (x,y, h):
+    result = stats.mannwhitneyu(x, y)
+    print("{}".format(h))
+    print(result)
+    if result [1] < 0.05:
+        print("Significant difference")
+    
+    else:
+        print("Not significant ")
+````
+
+### Output
+The output of the above functions is as follows:
+<details>
+           <summary>Setosa vs Virginica</summary>
+           <p>
+
+          Virginica and Setosa - Sepal Width
+          Ttest_indResult(statistic=6.289384996672061, pvalue=9.586039170379162e-09)
+          Significant difference
+          Virginica and Setosa - Sepal Length
+          Ttest_indResult(statistic=-15.386195820079404, pvalue=3.9668672709859296e-25)
+          Significant difference
+          Virginica and Setosa - Petal Width
+          MannwhitneyuResult(statistic=0.0, pvalue=1.3346292078190177e-18)
+          Significant difference
+          Virginica and Setosa - Petal Length
+          Ttest_indResult(statistic=-49.965703359355636, pvalue=9.713867061697096e-50)
+          Significant difference
+
+</p>
+</details>
+
+<details>
+           <summary>Versicolor vs Setosa</summary>
+           <p>
+
+           Versicolor and Setosa - Sepal Width
+           Ttest_indResult(statistic=9.282772555558111, pvalue=4.362239016010214e-15)
+           Significant difference
+           Versicolor and Setosa - Sepal Length
+           Ttest_indResult(statistic=-10.52098626754911, pvalue=3.746742613983842e-17)
+           Significant difference
+           Versicolor and Setosa - Petal Width
+           MannwhitneyuResult(statistic=0.0, pvalue=1.2540530397624869e-18)
+           Significant difference
+           Versicolor and Setosa - Petal Length
+           Ttest_indResult(statistic=-39.46866259397271, pvalue=1.057210030060334e-45)
+
+</p>
+</details>
+
+<details>
+           <summary>Versicolor vs Setosa</summary>
+           <p>
+
+          Virginica and Setosa - Sepal Width
+          Ttest_indResult(statistic=-3.2057607502218186, pvalue=0.0018191004238894803)
+          Significant difference
+          Virginica and Setosa - Sepal Length
+          Ttest_indResult(statistic=-5.629165259719801, pvalue=1.7248563024547942e-07)
+          Significant difference
+          Virginica and Setosa - Petal Width
+          MannwhitneyuResult(statistic=49.0, pvalue=4.8490227224570924e-17)
+          Significant difference
+          Virginica and Setosa - Petal Length
+          Ttest_indResult(statistic=-12.603779441384987, pvalue=4.900287527398095e-22)
+          Significant difference
+</p>
+</details>
+
+## Interpretation
+The p values of the above tests are all considerably lower than 0.05. This indicates a significant difference in mean sepal width, sepal length, petal length and petal width between each of the three species. Therefore, we can conclude based on this analysis that the three species differ markedly from each other in terms of their flower morphology.
+
+## Conclusion
+
+The aim of this analysis was to describe the dataset using Python, in terms of its characteristics, relationships between the variables and the degree to which the three species groups differ from each other. 
+
+In terms of distrubtion, we can see that the data is generally normally distributed, with low skewness and kurtosis values indicating the data is symmetrical and light tailed. The low volume of outliers suggests that petal and sepal measurements within the species generally fall within a defined range. The exploratory analysis also gave an insight into the morphological characteristics of the species.
+
+The correlation output for the entire data set was markedly different from that for the individual species groups, suggesting that trends seen within the data as a whole are not necessarily evident within species groups. 
+
+The final component of the analysis, which compared mean values between groups, found significant differences between all the species. This indicates that each of the three species groups have their own distinct characteristics in terms of flower shape/size.
+
+## Learnings/Potential Improvements
+During this project, I got a high-level introduction to data analysis for Python and what can be achieved using the libraries built for this purpose. I was able to leverage the statistics modules I covered in previous undergraduate/postgraduate studies and learn how to carry out these tests using the Scipy module.
+
+One area that I didn't cover in this project was machine learning due to time constraints. During my research I encountered several examples of people using the scikit-learn module to model the iris data set, and testing their model using the Train Test method, where 20% of the data is used to train the model to recognize patterns, and 80% is used to test it [26][27][28]. I think this would be a beneficial exercise for me to revisit when I've become mroe familiar with Python and data modelling. 
+## References <br></br>
 1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
 2. Medium. 2021. The Iris Dataset — A Little Bit of History and Biology. [online] Available at: <https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5> [Accessed 24 April 2021].
 3. Kolekar, P., 2021. Chapter 8 Descriptive statistics | BioSakshat - Free Study Materials. [online] Biosakshat.github.io. Available at: <https://biosakshat.github.io/descriptive-statistics.html> [Accessed 25 April 2021].
@@ -456,6 +727,16 @@ The KDE plots for sepal length and width again show considerable overlap between
 15. Medium. 2021. Skew and Kurtosis: 2 Important Statistics terms you need to know in Data Science. [online] Available at: <https://codeburst.io/2-important-statistics-terms-you-need-to-know-in-data-science-skewness-and-kurtosis-388fef94eeaa> [Accessed 27 April 2021].
 16.  Seaborn.pydata.org. 2021. seaborn.kdeplot — seaborn 0.11.1 documentation. [online] Available at: <https://seaborn.pydata.org/generated/seaborn.kdeplot.html> [Accessed 27 April 2021].
 17.  Medium. 2021. Histograms and Kernels Density Estimates. [online] Available at: <https://medium.com/@dcomp/histograms-and-kernels-density-estimates-a2c41eb08de3> [Accessed 27 April 2021].
-
+18.  Rpubs.com. 2021. RPubs - Chapter 1 Iris. [online] Available at: <https://rpubs.com/brendanon/351253> [Accessed 30 April 2021].
+19.  Kaggle.com. 2021. Seaborn plot to visualize Iris data. [online] Available at: <https://www.kaggle.com/rakesh6184/seaborn-plot-to-visualize-iris-data> [Accessed 30 April 2021].
+20.  Stack Abuse. 2021. Seaborn Library for Data Visualization in Python: Part 2. [online] Available at: <https://stackabuse.com/seaborn-library-for-data-visualization-in-python-part-2/> [Accessed 30 April 2021].
+21.  Texasgateway.org. 2021. Interpreting Scatterplots | Texas Gateway. [online] Available at: <https://www.texasgateway.org/resource/interpreting-scatterplots> [Accessed 30 April 2021].
+22.  Medium. 2021. Visualizing Data with Pairs Plots in Python. [online] Available at: <https://towardsdatascience.com/visualizing-data-with-pair-plots-in-python-f228cf529166#:~:text=A%20pairs%20plot%20allows%20us,are%20easily%20implemented%20in%20Python!> [Accessed 30 April 2021].
+23.Python for Data Science. 2021. T-test (Iris Data Set). [online] Available at: <https://pythonfordatascienceorg.wordpress.com/independent-t-test-python/> [Accessed 30 April 2021].
+24.  Spss-tutorials.com. 2021. Levene's Test - Quick Introduction. [online] Available at: <https://www.spss-tutorials.com/levenes-test-in-spss/> [Accessed 30 April 2021].
+25.  Docs.scipy.org. 2021. scipy.stats.ttest_ind — SciPy v1.6.3 Reference Guide. [online] Available at: <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html> [Accessed 30 April 2021].
+26.  Kaggle.com. 2021. Machine Learning with Iris Dataset. [online] Available at: <https://www.kaggle.com/jchen2186/machine-learning-with-iris-dataset> [Accessed 30 April 2021].
+27. SnapLogic. 2021. Iris Classification Demo | SnapLogic. [online] Available at: <https://www.snaplogic.com/machine-learning-showcase/iris-flower-classification> [Accessed 30 April 2021].
+28.  ritchieng.github.io. 2021. Iris Dataset. [online] Available at: <https://www.ritchieng.com/machine-learning-iris-dataset/> [Accessed 30 April 2021].
 
 
