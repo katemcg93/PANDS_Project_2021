@@ -558,7 +558,7 @@ The final part of this program aims to quantify the extent to which the three sp
  #### Levene's test </br></br>
  Before carrying out t tests to compare mean values between species, the assumptions associated with it should be tested. These are normality, which was tested in Part 1 of the analysis, and equality of variances (the spread/distribution around the mean should be equal in both samples).
  
- Levene's test can be used to assess equality of variances between two or more groups; this test is available in the scipy stats module. The null hypothesis for Levene's test is that the variance between the groups is equal; if the p value returned is less than 0.05, we must reject the null hypothesis and assume inequality of variances. 
+Levene's test can be used to assess equality of variances between two or more groups; this test is available in the scipy stats module. The null hypothesis for Levene's test is that the variance between the groups is equal; if the p value returned is less than 0.05, we must reject the null hypothesis and assume inequality of variances [23]
 
  
 ## References <br></br>
