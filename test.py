@@ -60,6 +60,17 @@ def histograms():
     plt.savefig("Petal Width.png")
     plt.close ()
 
+sepalLength = irisDataSet["Sepal Length"]
+sepalWidth = irisDataSet["Sepal Width"]
+petalLength = irisDataSet["Petal Length"]
+petalWidth = irisDataSet["Petal Width"]
 
 
-histograms()
+def scatterplots (a,b):
+        scatterPlot = sns.regplot(data = irisDataSet, x=a, y=b)
+        plt.show ()
+        plt.close ()
+        return scatterPlot
+
+
+species_sw_pl = scatterplots(sepalWidth,petalLength)
