@@ -628,10 +628,10 @@ sigSetVersSL = compare_means_no_ev(setosa["Sepal Length"], versicolor["Sepal Len
 sigsetVersPW = compare_means_non_para(setosa["Petal Width"], versicolor["Petal Width"], h = "Versicolor and Setosa - Petal Width")
 sigsetVersSPL= compare_means_no_ev(setosa["Petal Length"], versicolor["Petal Length"], h = "Versicolor and Setosa - Petal Length")
 
-sigVerVirgSW = compare_means_ev(versicolor["Sepal Width"], virginica["Sepal Width"], h = "Virginica and Setosa - Sepal Width")
-sigVerVirgSL = compare_means_ev(versicolor["Sepal Length"], virginica["Sepal Length"], h = "Virginica and Setosa - Sepal Length")
-sigsVerVirgPW = compare_means_non_para(versicolor["Petal Width"], virginica["Petal Width"], h = "Virginica and Setosa - Petal Width")
-sigsVerVirgPL = compare_means_no_ev(versicolor["Petal Length"], virginica["Petal Length"],h = "Virginica and Setosa - Petal Length" )
+sigVerVirgSW = compare_means_ev(versicolor["Sepal Width"], virginica["Sepal Width"], h = "Virginica and Versicolor - Sepal Width")
+sigVerVirgSL = compare_means_ev(versicolor["Sepal Length"], virginica["Sepal Length"], h = "Virginica and Versicolor - Sepal Length")
+sigsVerVirgPW = compare_means_non_para(versicolor["Petal Width"], virginica["Petal Width"], h = "Virginica and Versicolor - Petal Width")
+sigsVerVirgPL = compare_means_no_ev(versicolor["Petal Length"], virginica["Petal Length"],h = "Virginica and Versicolor - Petal Length" )
 
 
 
