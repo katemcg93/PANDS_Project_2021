@@ -674,21 +674,21 @@ The output of the above functions is as follows:
 </details>
 
 <details>
-           <summary>Versicolor vs Setosa</summary>
+           <summary>Versicolor vs Virginica</summary>
            <p>
 
-          Virginica and Setosa - Sepal Width
-          Ttest_indResult(statistic=-3.2057607502218186, pvalue=0.0018191004238894803)
-          Significant difference
-          Virginica and Setosa - Sepal Length
-          Ttest_indResult(statistic=-5.629165259719801, pvalue=1.7248563024547942e-07)
-          Significant difference
-          Virginica and Setosa - Petal Width
-          MannwhitneyuResult(statistic=49.0, pvalue=4.8490227224570924e-17)
-          Significant difference
-          Virginica and Setosa - Petal Length
-          Ttest_indResult(statistic=-12.603779441384987, pvalue=4.900287527398095e-22)
-          Significant difference
+        Virginica and Versicolor - Sepal Width
+        Ttest_indResult(statistic=-3.2057607502218186, pvalue=0.0018191004238894803)
+        Significant difference
+        Virginica and Versicolor - Sepal Length
+        Ttest_indResult(statistic=-5.629165259719801, pvalue=1.7248563024547942e-07)
+        Significant difference
+        Virginica and Versicolor - Petal Width
+        MannwhitneyuResult(statistic=49.0, pvalue=4.8490227224570924e-17)
+        Significant difference
+        Virginica and Versicolor - Petal Length
+        Ttest_indResult(statistic=-12.603779441384987, pvalue=4.900287527398095e-22)
+        Significant difference
 </p>
 </details>
 
