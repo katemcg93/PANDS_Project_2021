@@ -1,4 +1,4 @@
-# GMIT Higher Diploma in Data Anaytics
+# GMIT Higher Diploma in Data Analytics
 ## Programming and Scripting Project 2021: Analysis of the Iris Flower Data Set
 ## Author
 Kate McGrath
@@ -708,7 +708,7 @@ The final component of the analysis, which compared mean values between groups, 
 ## Learnings/Potential Improvements
 During this project, I got a high-level introduction to data analysis for Python and what can be achieved using the libraries built for this purpose. I was able to leverage the statistics modules I covered in previous undergraduate/postgraduate studies and learn how to carry out these tests using the Scipy module.
 
-One area that I didn't cover in this project was machine learning due to time constraints. During my research I encountered several examples of people using the scikit-learn module to model the iris data set, and testing their model using the Train Test method, where 20% of the data is used to train the model to recognize patterns, and 80% is used to test it [26][27][28]. I think this would be a beneficial exercise for me to revisit when I've become mroe familiar with Python and data modelling. 
+One area that I didn't cover in this project was machine learning due to time constraints. During my research I encountered several examples of people using the scikit-learn module to model the iris data set, and testing their model using the Train Test method, where 20% of the data is used to train the model to recognize patterns, and 80% is used to test it [26][27][28]. I think this would be a beneficial exercise for me to revisit when I've become more familiar with Python and data modelling. 
 ## References <br></br>
 1. Archive.ics.uci.edu. 2021. UCI Machine Learning Repository: Iris Data Set. [online] Available at: <https://archive.ics.uci.edu/ml/datasets/iris> [Accessed 24 April 2021].
 2. Medium. 2021. The Iris Dataset — A Little Bit of History and Biology. [online] Available at: <https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5> [Accessed 24 April 2021].
